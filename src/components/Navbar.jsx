@@ -23,7 +23,8 @@ export default function Navbar() {
                     <BsFillPencilFill />
                 </Link>
                 { isLoggedIn && <User /> } 
-                { isLoggedIn ?  <button>Logout</button> :  <button>Login</button> }            </nav>
+                { isLoggedIn ?  <button>Logout</button> :  <button>login</button> }            
+            </nav>
         </header>
     );
 }
