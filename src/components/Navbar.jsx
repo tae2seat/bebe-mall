@@ -4,6 +4,7 @@ import { BsFillPencilFill } from 'react-icons/bs'
 import babyFace from '../images/ICON_08.png'
 import { authApi } from '../axios';
 import { useSelector } from 'react-redux';
+import User from './User';
 
 export default function Navbar() {
 
@@ -21,6 +22,7 @@ export default function Navbar() {
                 <Link to='/products/new' className='text-2xl'>
                     <BsFillPencilFill />
                 </Link>
+                { isLoggedIn && <User /> } 
                 { isLoggedIn ?  <button>Logout</button> :  <button>Login</button> }            </nav>
         </header>
     );
