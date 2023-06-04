@@ -28,9 +28,9 @@ export default function ProductDetail() {
                             { options && options.map((option, index) => <option key={index}>option</option> )}
                         </select> */}
                     </div>
+                    <Button text="장바구니에 추가" onClick={handleClick}/>
                 </div>
             </section>
-            <Button text="장바구니에 추가" onClick={handleClick}/>
         </>
     );
 }
