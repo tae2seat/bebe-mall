@@ -25,7 +25,6 @@ export default function NewProduct() {
         //새로운 제품 추가 
         //제품 추가 된 후 setSuccess('제품이 성공적으로 추가되었습니다.') setTimeout(()=> { setSuccess(null)},4000 )
         //최종적으로 setIsUploading(false)
-    
     }
 
 
