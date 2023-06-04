@@ -1,11 +1,13 @@
 import React from 'react';
-import banner from '../images/banner.png'
+import Products from '../components/Products';
+import Banner from '../components/Banner';
 
 export default function Home() {
     return (
-       <div>
-            <img src={banner} alt='banner'/>
-       </div>
+       <>
+            <Banner />
+            <Products />
+       </>
     );
 }
 
