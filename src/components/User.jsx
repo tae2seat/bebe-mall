@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { getProfile } from '../redux/slices/profileSlice';
 
 export default function User() {
 
+    const dispatch = useDispatch()
+
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+    const {name, isLoading, isError} = useSelector((state) => state.profile)
+
+    useEffect(() => {
+        if(isLoggedIn){
+            dispatch(getProfile())
+        }
+    }, [])
 
     const [profileImage, setProfileImage] = useState('')
 
     useEffect(() => {   
-       if(isLoggedIn) {
         getProfileImage()
-       }
     }, [])
-
+    // CORS 문제가 일어남 
     const getProfileImage = async () => {
         try {
             const response = await axios.get('https://api.mybebe.net/api/v1/profile',{
                 headers : {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                    // "Access-Control-Allow-Origin":"*"
                 }
             })
             console.log(response.data.avatar)
@@ -28,7 +37,6 @@ export default function User() {
         }
     }
 
-
     return (
         <div className='flex items-center'>
             <img 
@@ -36,7 +44,7 @@ export default function User() {
                 src={profileImage} 
                 alt='profile' 
             />
-            <span className='hidden md:block'>사용자이름</span> 
+            <span className='hidden md:block'>{name}</span> 
         </div>
     );
 }

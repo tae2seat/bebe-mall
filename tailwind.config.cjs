@@ -8,7 +8,7 @@ module.exports = {
         brand: '#f95c58'
       },
       backgroundImage: {
-        banner: `url('../public/images/banner.png')`
+        banner: `url('/images/banner.png')`
       }
     },
   },
