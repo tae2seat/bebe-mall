@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authApi } from "../../axios";
 
 const initialState = {
     currentUser: null,

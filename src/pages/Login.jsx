@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import Button from '../components/buttons/Button';
 import { authApi } from '../axios/index';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../redux/slices/authSlice';
 
 export default function Login() {
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -23,6 +29,8 @@ export default function Login() {
             //로컬스토리지에 저장하는 이유? 웹페이지를 새로 고침하거나 브라우저가 종료한 후에도 데이터가 유지되게 하기 위해 
             localStorage.setItem('accessToken', response.data.accessToken)
             localStorage.setItem('refreshToken', response.data.refreshToken)
+            dispatch(login())
+            navigate('/')
         } catch (error) {
             console.log(error)
         }

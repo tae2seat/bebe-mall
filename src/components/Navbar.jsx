@@ -1,14 +1,38 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsFillPencilFill } from 'react-icons/bs'
 import babyFace from '../images/ICON_08.png'
-import { authApi } from '../axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '../components/buttons/Button';
 import User from './User';
+import { authApi } from '../axios';
+import { logout } from '../redux/slices/authSlice';
+
 
 export default function Navbar() {
 
-    const isLoggedIn = true
+    const dispatch  = useDispatch()
+    const navigate = useNavigate()
+
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+
+    const handleLogout = async (e) => {
+        try {
+            const response = await authApi.post('/logout', null, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+            dispatch(logout())
+            localStorage.clear()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleLogin = (e) => {
+        navigate('/login')
+    }
 
     return (
         <header className='flex justify-between border-b border-gray-300 p-2'>
@@ -24,7 +48,9 @@ export default function Navbar() {
                     <BsFillPencilFill />
                 </Link>
                 { isLoggedIn && <User /> } 
-                { isLoggedIn ?  <button>Logout</button> :  <button>login</button> }            
+                { isLoggedIn 
+                    ?  <Button onClick={handleLogout} text='Logout' /> 
+                    :  <Button onClick={handleLogin} text='Login' />  }          
             </nav>
         </header>
     );
