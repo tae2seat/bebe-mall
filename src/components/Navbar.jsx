@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BsFillPencilFill } from 'react-icons/bs'
 import babyFace from '../images/ICON_08.png'
