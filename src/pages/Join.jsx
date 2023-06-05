@@ -48,28 +48,33 @@ export default function Join() {
             <h2 className='text-2xl font-bold my-4'>Bebe Mall 회원가입</h2>
             <form className='flex flex-col p-12' onSubmit={handleSubmit}>
                 <input 
-                    type="text"  
+                    type='text' 
+                    name='name'
                     placeholder='이름' 
                     onChange={handleChangeName}
                 />
                 <input 
-                    type="email"
+                    type='email'
+                    name='email'
                     placeholder='이메일'
                     onChange={handleChangeEmail}
                 />
                 <input 
-                    type="password"
+                    type='password'
+                    name='password'
                     placeholder='비밀번호' 
                     onChange={handleChangePassword}
                 />
                 <input 
-                    type="date" 
+                    type='date'
+                    name='birthDate'
                     placeholder='생년월일'
                     onChange={handleChangeBirthDate}
                 />
                 <input 
-                    type="text" 
-                    placeholder='성별 ex)여자,님지'
+                    type='text'
+                    name='gender'
+                    placeholder='성별  ex)여자,님지'
                     onChange={handleChangeGender}
                 />
                 <Button text='회원가입하기' />
