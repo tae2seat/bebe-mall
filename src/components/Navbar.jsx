@@ -47,7 +47,7 @@ export default function Navbar() {
                 <Link to='/products/new' className='text-2xl'>
                     <BsFillPencilFill />
                 </Link>
-                { isLoggedIn && <User /> } 
+                { isLoggedIn && <Link to='/profile'><User /></Link> } 
                 { isLoggedIn 
                     ?  <Button onClick={handleLogout} text='Logout' /> 
                     :  <Button onClick={handleLogin} text='Login' />  }          

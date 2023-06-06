@@ -21,7 +21,6 @@ export default function User() {
     useEffect(() => {   
         fetchProfileImage()
     }, [])
-
     //CORS 문제가 일어남  
     // 백엔드 헤더에 'Cross-origin-Resource-policy' 추가해야 됨
     const fetchProfileImage = async () => {
@@ -37,6 +36,7 @@ export default function User() {
             console.log(error)
         }
     }
+
     if(isLoading) {
         return <div>Loading...</div>
     }
@@ -44,7 +44,6 @@ export default function User() {
     if(isError) { 
         return <div>Error occurred!</div>
     }
-
 
     return (
         <div className='flex items-center'>
