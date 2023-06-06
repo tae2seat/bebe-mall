@@ -14,6 +14,7 @@ import MyCarts from './pages/MyCart'
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import UserProfile from './pages/UserProfile'
+import UserProfileEdit from './pages/UserProfileEdit'
 
 
 
@@ -53,6 +54,10 @@ const router  =createBrowserRouter([
       {
         path: '/profile',
         element: <UserProfile />
+      },
+      {
+        path: '/profile/edit',
+        element: <UserProfileEdit />
       }
     ]
 }

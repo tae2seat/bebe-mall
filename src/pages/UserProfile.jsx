@@ -11,32 +11,13 @@ export default function UserProfile() {
     const navigate = useNavigate()
 
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-    const { name, email, gender, birthDate } = useSelector((state) => state.profile)
-
-    const [profileImage, setProfileImage] = useState('')
+    const { name, email, gender, birthDate, avatar } = useSelector((state) => state.profile)
 
     useEffect(() => {
         if(isLoggedIn){
             dispatch(getProfile())
         }
     },[isLoggedIn])
-
-    useEffect(() => {
-        getProfileImage()
-    },[])
-
-    const getProfileImage = async () => {
-        try {
-            const response = await axios.get('https://api.mybebe.net/api/v1/profile',{
-                headers : {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-                }
-            })
-            setProfileImage(response.data.avatar)
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     const handleClickEdit = (e) => {
         navigate('/profile/edit')
@@ -45,10 +26,10 @@ export default function UserProfile() {
 
     return (
         <section className='w-full text-center'>
-            <h2 className='text-2xl font-bold my-4'>User Profile</h2>
+            <h2 className='text-2xl font-bold my-4'>User Profile Page</h2>
             <img 
                 className='w-96 mx-auto mb-2'
-                src={profileImage} 
+                src={avatar} 
                 alt='profileImage' 
             />
             <div className='flex flex-col p-12'>

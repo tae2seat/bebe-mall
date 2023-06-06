@@ -20,6 +20,7 @@ export default function User() {
 
     useEffect(() => {   
         fetchProfileImage()
+        //user에서 profileImage를 불러왔으니까 리덕스에 저장이 되어있기 때문에 다른 곳에서는 useSelector를 이용해서 한다. 
     }, [])
     //CORS 문제가 일어남  
     // 백엔드 헤더에 'Cross-origin-Resource-policy' 추가해야 됨
