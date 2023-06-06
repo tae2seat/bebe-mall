@@ -53,6 +53,7 @@ export default function User() {
                 src={profileImage}
                 alt='profile' 
             />
+            {/* 등록된 이미지 없으면 기본 이미지로 보이게끔  */}
             <span className='hidden md:block'>{name}</span> 
         </div>
     );

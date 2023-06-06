@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProfile } from '../redux/slices/profileSlice';
 import Button from '../components/buttons/Button';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserProfileEdit() {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
     const { name, birthDate, gender, avatar, isLoading, isError } = useSelector((state) => state.profile)
@@ -46,7 +48,6 @@ export default function UserProfileEdit() {
 
         const formData = new FormData()
 
-
         try {
             const response = await axios.put('https://api.mybebe.net/api/v1/profile/edit',{
                 name: editedName,
@@ -59,12 +60,12 @@ export default function UserProfileEdit() {
                 }
             })
             console.log("성공!!")
+            navigate('/profile')
 
         } catch (error) {
             console.log(error)
         }
     }
-
 
     if(isLoading){
         return <div>Loading...</div>
@@ -77,12 +78,13 @@ export default function UserProfileEdit() {
     return (
         <section className='w-full text-center'>
             <h2 className='text-2xl font-bold my-4'>User Profile Edit Page</h2>
-            <img
+            <img 
                 className='w-96 mx-auto mb-2'
                 src={avatar}
                 alt='profileImage'
                 onChange={handleChangeNewProfileImage}
             />
+            <button >사진 바꾸기</button>
             <form 
                 className='flex flex-col p-12'
                 onSubmit={handleSubmitUserEdit}
