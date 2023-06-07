@@ -3,6 +3,7 @@ import Button from '../../components/buttons/Button';
 
 export default function ProductDetail({item}) {
 
+    // product Detail get 하기 
     
     return (
         <>

@@ -11,6 +11,8 @@ module.exports = {
         banner: `url('/images/banner.png')`
       }
     },
+   
   },
   plugins: [],
 }
+
