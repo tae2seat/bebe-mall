@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
 import Button from '../../components/buttons/Button';
 
-export default function ProductDetail() {
+export default function ProductDetail({item}) {
 
-    const handleClick = (e) => {
-        //장바구니에 추가 
-    }
-
-    // const [selected, setSelected] = useState(option && option[0]);
-
-    // const handleSelect = (e) => setSelected(e.target.value)
-
+    
     return (
         <>
             <p className='mx-12 mt-4 text-gray-700'>카테고리</p>
@@ -28,7 +21,7 @@ export default function ProductDetail() {
                             { options && options.map((option, index) => <option key={index}>option</option> )}
                         </select> */}
                     </div>
-                    <Button text="장바구니에 추가" onClick={handleClick}/>
+                    <Button text="장바구니에 추가" />
                 </div>
             </section>
         </>
