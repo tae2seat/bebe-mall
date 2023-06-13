@@ -30,7 +30,7 @@ export default function Products() {
     }
     // 로딩 중일 때 에러 뜰 때 경우 
     return (
-        <ul className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4'>
+        <ul className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>
             { 
                 products.items?.map((item, id ) => (
                     <ProductCard key={id} item={item} />

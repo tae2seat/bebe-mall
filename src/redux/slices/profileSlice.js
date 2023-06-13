@@ -11,7 +11,6 @@ export const getProfile = createAsyncThunk(
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
-            console.log(response)
             return response.data
         } catch (error) {
             console.log(error)
