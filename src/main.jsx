@@ -15,6 +15,7 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import UserProfile from './pages/UserProfile'
 import UserProfileEdit from './pages/UserProfileEdit'
+import ProductEdit from './pages/product/ProductEdit'
 
 
 
@@ -36,19 +37,23 @@ const router  =createBrowserRouter([
         element: <Join />
       },
       {
-        path: 'products',
+        path: '/products',
         element: <AllProducts />
       },
       {
-        path: 'products/new',
+        path: '/products/new',
         element: <NewProduct />
       },
       {
-        path: 'product/detail/:id',
+        path: '/product/detail/:id',
         element: <ProductDetail />
       },
       {
-        path: 'carts',
+        path: '/product/edit',
+        element: <ProductEdit />
+      },
+      {
+        path: '/carts',
         element: <MyCarts />
       },
       {
