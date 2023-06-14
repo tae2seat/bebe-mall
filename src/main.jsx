@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, useParams } from 'react-router-dom'
 import NotFound from './pages/NotFound'
 import Login from './pages/Login'
 import Join from './pages/Join'
@@ -15,9 +15,7 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import UserProfile from './pages/UserProfile'
 import UserProfileEdit from './pages/UserProfileEdit'
-import ProductEdit from './pages/product/ProductEdit'
-
-
+import ProductEdit from './pages/product/ProductEdit' 
 
 
 const router  =createBrowserRouter([
@@ -49,7 +47,7 @@ const router  =createBrowserRouter([
         element: <ProductDetail />
       },
       {
-        path: '/product/edit',
+        path: '/product/edit/:id',
         element: <ProductEdit />
       },
       {

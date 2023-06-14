@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 export default function ProductDetail() {
 
-    const {id} = useParams()
+    const { id } = useParams()
 
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
@@ -81,7 +81,7 @@ export default function ProductDetail() {
         <>
             <p className='mx-12 mt-4 text-gray-700'>{}</p>
             <section className='flex flex-col md:flex-row p-4'>
-                <img className='w-full px-4 basis-7/12' />
+                <img className='w-full px-4 basis-7/12' src={product.image} alt='image'/>
                 <div className='w-full basis-5/12 flex flex-col p-4'>
                     <h2 className='text-3xl font-bold py-2 '>{product.name}</h2>
                     <p className='text-2xl font-bold py-2 border-b border-gary-400'>{product.price}</p>
@@ -98,6 +98,7 @@ export default function ProductDetail() {
                     </div>
                     <Button text="장바구니에 추가" onClick={()=>addToCart(product, newOption)} />
                 </div>
+
             </section>  
         </>
     );
