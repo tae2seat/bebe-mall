@@ -1,26 +1,59 @@
 import React, { useEffect, useState } from 'react';
 import { RiDeleteBin5Fill} from 'react-icons/ri'
 import { AiOutlinePlusSquare, AiOutlineMinusSquare } from 'react-icons/ai'
+import { useSelector } from 'react-redux';
 
 export default function MyCart() {
 
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
     const [cartItems, setCartItems] = useState([])
 
-
-    console.log(cartItems)
     useEffect(() => {
+       if(isLoggedIn){
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         setCartItems(cart)
-    },[])
+       }
+    },[isLoggedIn])
 
-    const handleClickMinus = (e) => {
-
+    const handleClickMinus = (product) => {
+        const updatedCartItems = cartItems.map((item) => {
+            if (item.id === product.id) {
+              const quantity = getItemQuantityFromLocalStorage(item.id); // 로컬 스토리지에서 해당 상품의 수량 가져오기
+              return {
+                ...item,
+                quantity: quantity > 1 ? quantity - 1 : quantity,
+              };
+            }
+            return item;
+          });
+          setCartItems(updatedCartItems);
+          localStorage.setItem('cart', JSON.stringify(updatedCartItems));
     }
-    const handleClickPlus = (e) => {
-
+    const handleClickPlus = (product) => {
+        const updatedCartItems = cartItems.map((item) => {
+            if (item.id === product.id) {
+              const quantity = getItemQuantityFromLocalStorage(item.id); // 로컬 스토리지에서 해당 상품의 수량 가져오기
+              return {
+                ...item,
+                quantity: quantity + 1,
+              };
+            }
+            return item;
+          });
+          setCartItems(updatedCartItems);
+          localStorage.setItem('cart', JSON.stringify(updatedCartItems));
     }
+
+    const getItemQuantityFromLocalStorage = (itemId) => {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const item = cart.find((item) => item.id === itemId);
+        return item ? item.quantity : 0;
+      };
+
     const handleClickDelete = (product) => {
-        const [cartItems, setCartItems] = useState([])
+        const updatedCartItems = cartItems.filter((item) => item.id !== product.id)
+        setCartItems(updatedCartItems)
+        localStorage.setItem('cart', JSON.stringify(updatedCartItems))
 
     }
 
@@ -42,9 +75,9 @@ export default function MyCart() {
                                 <p>{product.price}</p>
                                 <p>{product.option}</p>
                                 <div className='flex'>
-                                    <AiOutlineMinusSquare onClick={handleClickMinus} />
-                                    <span>수량</span>
-                                    <AiOutlinePlusSquare onClick={handleClickPlus} />
+                                    <AiOutlineMinusSquare onClick={() => handleClickMinus(product)} />
+                                    <span>{String(product.quantity)}</span>
+                                    <AiOutlinePlusSquare onClick={() => handleClickPlus(product)} />
                                     <RiDeleteBin5Fill onClick={()=> handleClickDelete(product)} />
                                 </div>
                             </div>

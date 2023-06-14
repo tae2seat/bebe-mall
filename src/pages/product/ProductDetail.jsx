@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 export default function ProductDetail() {
 
     const { id } = useParams()
+    const navigate = useNavigate()
 
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
@@ -77,6 +78,9 @@ export default function ProductDetail() {
         localStorage.setItem('cart', JSON.stringify(cartItems))
     }
       
+    const goToEdit = (e) => {
+        navigate(`/product/edit/${id}`)
+    }
     return (
         <>
             <p className='mx-12 mt-4 text-gray-700'>{}</p>
@@ -96,7 +100,10 @@ export default function ProductDetail() {
                                 ))}
                             </select>
                     </div>
-                    <Button text="장바구니에 추가" onClick={()=>addToCart(product, newOption)} />
+                    <div className='flex flex-col gap-1'>
+                        <Button text="장바구니에 추가" onClick={()=>addToCart(product, newOption)} />
+                        <Button text='제품 수정하기' onClick={goToEdit} />
+                    </div>
                 </div>
 
             </section>  
