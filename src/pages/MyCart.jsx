@@ -3,6 +3,7 @@ import { RiDeleteBin5Fill} from 'react-icons/ri'
 import { AiOutlinePlusSquare, AiOutlineMinusSquare } from 'react-icons/ai'
 import { useSelector } from 'react-redux';
 
+
 export default function MyCart() {
 
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
@@ -16,46 +17,57 @@ export default function MyCart() {
     },[isLoggedIn])
 
     const handleClickMinus = (product) => {
-        const updatedCartItems = cartItems.map((item) => {
-            if (item.id === product.id) {
-              const quantity = getItemQuantityFromLocalStorage(item.id); // 로컬 스토리지에서 해당 상품의 수량 가져오기
-              return {
-                ...item,
-                quantity: quantity > 1 ? quantity - 1 : quantity,
-              };
-            }
-            return item;
-          });
-          setCartItems(updatedCartItems);
-          localStorage.setItem('cart', JSON.stringify(updatedCartItems));
-    }
-    const handleClickPlus = (product) => {
-        const updatedCartItems = cartItems.map((item) => {
-            if (item.id === product.id) {
-              const quantity = getItemQuantityFromLocalStorage(item.id); // 로컬 스토리지에서 해당 상품의 수량 가져오기
-              return {
-                ...item,
-                quantity: quantity + 1,
-              };
-            }
-            return item;
-          });
-          setCartItems(updatedCartItems);
-          localStorage.setItem('cart', JSON.stringify(updatedCartItems));
-    }
+        let updatedCartItems = [...cartItems]
+        const existingItemIndex = cartItems.findIndex(
+            (item) => item.id === product.id && item.option === product.option
+        )
 
-    const getItemQuantityFromLocalStorage = (itemId) => {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const item = cart.find((item) => item.id === itemId);
-        return item ? item.quantity : 0;
-      };
-
-    const handleClickDelete = (product) => {
-        const updatedCartItems = cartItems.filter((item) => item.id !== product.id)
+        if(existingItemIndex !== -1) {
+            if(typeof updatedCartItems[existingItemIndex].quantity === 'number'){
+                updatedCartItems[existingItemIndex].quantity -= 1
+                if(updatedCartItems[existingItemIndex].quantity < 1){
+                    updatedCartItems[existingItemIndex].quantity = 1
+                }
+            } else {
+                updatedCartItems[existingItemIndex.quantity] = 1
+            }
+        }
         setCartItems(updatedCartItems)
         localStorage.setItem('cart', JSON.stringify(updatedCartItems))
-
     }
+
+    const handleClickPlus = (product) => {
+        let updatedCartItems = [...cartItems]
+        const existingItemIndex = cartItems.findIndex(
+            (item) => item.id === product.id && item.option === product.option
+        )
+        if(existingItemIndex !== -1) {
+            if(typeof updatedCartItems[existingItemIndex].quantity === 'number'){
+                updatedCartItems[existingItemIndex].quantity += 1
+            } else {
+                updatedCartItems[existingItemIndex].quantity = 1
+            }
+        } else {
+            updatedCartItems = [
+                ...cartItems,
+                {
+                    ...product,
+                    quantity: 1
+                }
+            ]
+        }
+        setCartItems(updatedCartItems)
+        localStorage.setItem('cart', JSON.stringify(updatedCartItems))
+    }
+
+    const handleClickDelete = (product) => {
+        const updatedCartItems = cartItems.filter(
+            (item) => item.id !== product.id || (item.id === product.id && item.option !== product.option)
+        )
+        setCartItems(updatedCartItems)
+        localStorage.setItem('cart', JSON.stringify(updatedCartItems))
+    };
+    
 
     return (
         <section className='w-full text-center'>
@@ -63,29 +75,30 @@ export default function MyCart() {
             {cartItems.length === 0 ? (
                 <p>장바구니가 비어있습니다. 상품을 추가해 주세요! </p>
             ) : (
-                <ul>
-                { cartItems.map((product, index) => {
-                    console.log(cartItems)
-            
+                <section className=''>
+                { cartItems.map((product, id) => {
+                    console.log(product)
                     return (
-                        <li key={index} className='flex'>
-                            <img src={product.image}/>
-                            <div className='flex'>
-                                <p>{product.name}</p>
-                                <p>{product.price}</p>
-                                <p>{product.option}</p>
-                                <div className='flex'>
-                                    <AiOutlineMinusSquare onClick={() => handleClickMinus(product)} />
-                                    <span>{String(product.quantity)}</span>
-                                    <AiOutlinePlusSquare onClick={() => handleClickPlus(product)} />
-                                    <RiDeleteBin5Fill onClick={()=> handleClickDelete(product)} />
+                        <li key={id} className='flex justify-between my-2 items-center'>
+                            <img src={product.image} className='w-24 md:w-48 rounded-lg'/>
+                            <div className='flex-1 flex justify-between ml-4'>
+                                <div className='basis-3/5'>
+                                    <p className='text-lg'>{product.name}</p>
+                                    <p className='text-xl font-bold text-brand'>{product.option}</p>
+                                    <p >{product.price}원</p>
+                                </div>
+                                <div className='flex text-2xl items-center'>
+                                    <AiOutlineMinusSquare className=' transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1' onClick={() => handleClickMinus(product)} />
+                                    <span>{product.quantity}</span>
+                                    <AiOutlinePlusSquare  className=' transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1' onClick={() => handleClickPlus(product)} />
+                                    <RiDeleteBin5Fill  className=' transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1' onClick={()=> handleClickDelete(product)} />
                                 </div>
                             </div>
                         </li>
                     )
                 })
                 }
-            </ul>
+            </section>
             )}
         </section>
     );

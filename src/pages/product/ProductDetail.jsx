@@ -69,13 +69,25 @@ export default function ProductDetail() {
     const addToCart = (product, newOption) => {
         const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
       
-        const item = {
-            ...product,
-            option : newOption
+        const existingItemIndex = cartItems.findIndex(
+            (item) => item.id === product.id && item.option === newOption
+        );
+        
+        if (existingItemIndex !== -1) {
+            // 상품이 이미 장바구니에 존재하는 경우
+            const updatedCartItems = [...cartItems];
+            updatedCartItems[existingItemIndex].quantity += 1;
+            localStorage.setItem('cart', JSON.stringify(updatedCartItems));
+        } else {
+            // 상품이 장바구니에 존재하지 않는 경우
+            const item = {
+                ...product,
+                option: newOption,
+                quantity: 1
+            };
+            cartItems.push(item);
+            localStorage.setItem('cart', JSON.stringify(cartItems));
         }
-
-        cartItems.push(item)
-        localStorage.setItem('cart', JSON.stringify(cartItems))
     }
       
     const goToEdit = (e) => {
