@@ -16,7 +16,7 @@ export default function ProductCard({item}) {
         <li 
             onClick={handleClickProduct}
             className='rounded-lg shadow-md overflow-hidden cursor-pointer transition-all hover:scale-105 '>
-            <img className='w-full' src={item.image} alt='productIamge'/>
+            <img className='w-full h-72 object-cover ' src={item.image} alt='productIamge'/>
             <div className='mt-2 px-2 text-lg flex justify-between items-center'>
                 <h3 className='truncate'>{item.name}</h3>
                 <p>{item.price}원</p>
