@@ -10,42 +10,36 @@ export default function ProductEdit() {
 
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
-    const [product, setProduct] = useState('')
+    const [product, setProduct] = useState(null)
     const [categories, setCategories] = useState([])
 
-    const [newFile, setNewFile] = useState(product.image || '')
-    const [productEditName, setProductEditName] = useState(product.name || '')
-    const [editPrice, setEditPrice] = useState(product.price || '')
-    const [editCategory, setEditCategory] = useState(product.cId || '')
-    const [editDescription, setEditDescription] = useState(product.description || '')
+    const [productName, setProductName] = useState('')
+    const [cId, setCId] = useState('')
+    const [price, setPrice] = useState('')
+    const [description, setDescription] = useState('')
+    const [file, setFile] = useState('')
 
-    const handleChangeEditFile = (e) => {
-        const newFile = e.target.files[0]
-        setNewFile(newFile)
+    const handleChangeProductName = (e) => {
+        setProductName(e.target.value)
+    }
+    const handleChangeCategory = (e) => {
+        setCId(e.target.value)
+    }
+    const handleChangePrice = (e) => {
+        setPrice(e.target.value)
+    }
+    const handleChangeDescription = (e) => {
+        setDescription(e.target.value)
+    }
+    const handleChangeFile = (e) => {
+        setFile(e.target.files[0]) 
     }
 
-    const handleChangeEditProductName = (e) => {
-        setProductEditName(e.target.value)
-    }
-
-    const handleChangeEditPrice = (e) => {
-        setEditPrice(e.target.value)
-    }
-
-    const handleChangeEditCategory = (e) => {
-        setEditCategory(e.target.value)
-    }
-
-    const handleChangeEditDescription = (e) => {
-        setEditDescription(e.target.value)
-    }
- 
     useEffect(() => {
-        if(isLoggedIn) {
-            getProductDetail()
-            getCategory()
-        }
-    },[isLoggedIn])
+    if(isLoggedIn) {
+        getProductDetail()
+        getCategory()
+    }},[isLoggedIn])
 
     const getProductDetail = async () => {
         try {
@@ -54,7 +48,12 @@ export default function ProductEdit() {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
-            setProduct(response.data)          
+            setProduct(response.data)   
+            setProductName(response.data.name)
+            setCId(response.data.category)
+            setPrice(response.data.price)
+            setDescription(response.data.description)
+            setFile(response.data.file)       
         } catch (error) {
             console.log(error)
         }
@@ -73,8 +72,28 @@ export default function ProductEdit() {
         }
     }
 
-    const handleSubmitEditProduct = (e) => {
+    const handleSubmitEditProduct = async (e) => {
         e.preventDefault()
+
+        const formDate = new FormData()
+        
+        formDate.append('name', productName)
+        formDate.append('file', file)
+        formDate.append('price', price)
+        formDate.append('description', description)
+        formDate.append('category',cId)
+
+        try {
+            const response  = await axios.put(`https://api.mybebe.net/api/v1/mall/item/${id}`, formDate, {
+                headers : {
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            console.log("성공!!")
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
@@ -82,15 +101,15 @@ export default function ProductEdit() {
     return (
         <section className='w-full text-center'>
             <h2 className='text-2xl font bold my-4'>제품 수정 후 등록</h2>
-            { newFile ? (
+            { file ? (
                 <img 
                 className='w-96 mx-auto mb-2' 
-                src={URL.createObjectURL(newFile)} 
+                src={URL.createObjectURL(file)} 
                 alt='file' />
             ) : (
                 <img
                     className='w-96 mx-auto mb-2'
-                    src={product.image}
+                    src={product?.image}
                     alt='file'
                 />
             )}
@@ -99,29 +118,28 @@ export default function ProductEdit() {
                     type='file'
                     accept='image/*'
                     name='file'
-                    defaultValue={product.image || ''}
                     required
-                    onChange={handleChangeEditFile}
+                    onChange={handleChangeFile}
                 />
                 <input 
                     type='text'
                     name='제품명'
-                    defaultValue={product.name || ''}
+                    defaultValue={productName}
                     required
-                    onChange={handleChangeEditProductName}
+                    onChange={handleChangeProductName}
                 />
                 <input 
                     type='number' 
                     name='price' 
-                    defaultValue={product.price || ''} 
+                    defaultValue={price} 
                     required 
-                    onChange={handleChangeEditPrice}
+                    onChange={handleChangePrice}
                 />
                 <div className='p-4 outline-none border border-gray-300 my-1 text-left'>
                     <label className='text-gray-400'>카테고리</label>
-                    <select className='ml-3 text-center'>
+                    <select className='ml-3 text-center' onChange={handleChangeCategory}>
                         {categories?.map((category) => (
-                            <option key={category.id} onChange={handleChangeEditCategory} defaultValue={editCategory === category.id}> 
+                            <option key={category.id}  defaultValue={cId === category.id}> 
                                 {category.name}
                             </option>
                         ))}
@@ -130,9 +148,9 @@ export default function ProductEdit() {
                 <input 
                     type='text'
                     name='description'
-                    defaultValue={product.description || ''}
+                    defaultValue={description}
                     required
-                    onChange={handleChangeEditDescription}
+                    onChange={handleChangeDescription}
                 />
                 <Button text='제품 수정하기' />
             </form>
