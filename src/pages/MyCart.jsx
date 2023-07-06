@@ -10,6 +10,7 @@ export default function MyCart() {
 
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
     const [cartItems, setCartItems] = useState([])
+    const [totalAmount, setTotalAmount] = useState(0)
 
     useEffect(() => {
        if(isLoggedIn){
@@ -17,6 +18,17 @@ export default function MyCart() {
         setCartItems(cart)
        }
     },[isLoggedIn])
+
+    useEffect(() => {
+        const calculateTotalAmount = () => {
+                let sum = 0;
+            for (const item of cartItems) {
+                sum += item.price * item.quantity
+            }
+            setTotalAmount(sum);
+        }   
+        calculateTotalAmount();
+    },[cartItems])
 
     const handleClickMinus = (product) => {
         let updatedCartItems = [...cartItems]
@@ -69,7 +81,7 @@ export default function MyCart() {
         setCartItems(updatedCartItems)
         localStorage.setItem('cart', JSON.stringify(updatedCartItems))
     };
-    
+
 
     return (
         <section className='flex flex-col w-full text-center p-8'>
@@ -101,13 +113,13 @@ export default function MyCart() {
                 }
             </ul>)}
             <div className='flex justify-between items-center mb-6 px-2 md:px-8 lg:px-16 '>
-                <PriceCard text='상품 총액' />
+                <PriceCard text='상품 총액' price={totalAmount} />
                 + 
-                <PriceCard text='배송액'/>
+                <PriceCard text='배송액' price={'3000'}/>
                 =
-                <PriceCard text='총액' />
+                <PriceCard text='총액'  price={totalAmount + 3000}  />
             </div>
-            <Button text='주문하기' />
+            <Button text='주문하기'/>
         </section>
     );
     //로컬스토리지 사용, redux 상태관리를 하던가 , 서버랑 api 통신을 하던가 

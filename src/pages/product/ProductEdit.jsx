@@ -50,7 +50,7 @@ export default function ProductEdit() {
             })
             setProduct(response.data)   
             setProductName(response.data.name)
-            setCId(response.data.category)
+            setCId(response.data.item_categories[0].id)
             setPrice(response.data.price)
             setDescription(response.data.description)
             setFile(response.data.file)       
@@ -81,7 +81,7 @@ export default function ProductEdit() {
         formDate.append('file', file)
         formDate.append('price', price)
         formDate.append('description', description)
-        formDate.append('category',cId)
+        formDate.append('categoryId',cId)
 
         try {
             const response  = await axios.put(`https://api.mybebe.net/api/v1/mall/item/${id}`, formDate, {
