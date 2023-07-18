@@ -82,7 +82,7 @@ export default function UserProfileEdit() {
     <section className="w-full text-center">
       <h2 className="text-2xl font-bold py-8">User Profile Edit Page</h2>
       <img
-        className="w-96 mx-auto p-12  bg-yellow-100 "
+        className="w-96 mx-auto p-12 "
         src={avatar}
         alt="profileImage"
         onChange={handleChangeNewProfileImage}

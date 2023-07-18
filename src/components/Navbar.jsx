@@ -36,7 +36,7 @@ export default function Navbar() {
 
   return (
     <header className="flex justify-between border-b border-gray-300 p-2">
-      <Link to="/" className="flex items-center text-4xl text-brand gap-2">
+      <Link to="/" className="flex items-center text-4xl text-[#472f4e] gap-2">
         <img
           src={babyFace}
           alt="로고"
@@ -45,10 +45,8 @@ export default function Navbar() {
         <h1 className="hidden md:block">Bebe</h1>
         <span>Mall</span>
       </Link>
-      <nav className="flex items-center gap-4 font-semibold">
-        <Link to="/products" className="">
-          Products
-        </Link>
+      <nav className="flex items-center gap-4 font-semibold ">
+        <Link to="/products">Products</Link>
         <Link to="/carts">Carts</Link>
         {isAdmin === true ? (
           <Link to="/products/new" className="text-2xl">

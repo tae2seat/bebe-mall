@@ -25,13 +25,9 @@ export default function UserProfile() {
 
   return (
     <section className="w-full text-center">
-      <h2 className="text-2xl font-bold py-8 bg-red-100">User Profile Page</h2>
+      <h2 className="text-2xl font-bold py-8">User Profile Page</h2>
       {avatar ? (
-        <img
-          className="w-96 mx-auto p-12 bg-yellow-100 "
-          src={avatar}
-          alt="profileImage"
-        />
+        <img className="w-96 mx-auto p-12 " src={avatar} alt="profileImage" />
       ) : (
         <div className="w-96 mx-auto p-12 ">
           수정 페이지에서 이미지를 등록해주세요 ...{" "}
