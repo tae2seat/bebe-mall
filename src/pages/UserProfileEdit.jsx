@@ -99,14 +99,14 @@ export default function UserProfileEdit() {
           />
         )}
         <input
-          className="w-1/3 p-1"
+          className="w-1/2 md:w-1/3 p-1"
           type="file"
           accept="image/*"
           onChange={handleChangeNewProfileImage}
         />
       </form>
       <form
-        className="flex flex-col py-12 px-40"
+        className="flex flex-col py-12 px-12 md:px-40 gap-2"
         onSubmit={handleSubmitUserEdit}
       >
         <input

@@ -103,7 +103,7 @@ export default function MyCart() {
           {cartItems.map((product, id) => {
             return (
               <li key={id} className="flex justify-between my-4 items-center">
-                <img src={product.image} className="w-24 md:w-48 rounded-lg" />
+                <img src={product.image} className="w-12 md:w-48 rounded-lg" />
                 <div className="flex-1 flex justify-between ml-4">
                   <div className="basis-3/5">
                     <p className="text-lg">{product.name}</p>
@@ -114,16 +114,16 @@ export default function MyCart() {
                   </div>
                   <div className="flex text-2xl items-center">
                     <AiOutlineMinusSquare
-                      className=" transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1"
+                      className="transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1"
                       onClick={() => handleClickMinus(product)}
                     />
                     <span>{product.quantity}</span>
                     <AiOutlinePlusSquare
-                      className=" transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1"
+                      className="transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1"
                       onClick={() => handleClickPlus(product)}
                     />
                     <RiDeleteBin5Fill
-                      className=" transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1"
+                      className="transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1"
                       onClick={() => handleClickDelete(product)}
                     />
                   </div>
@@ -135,7 +135,7 @@ export default function MyCart() {
       )}
       {cartItems.length > 0 && (
         <div className="flex flex-col">
-          <div className="flex flex-col md:flex-row justify-center items-center mb-6 p-4 md:px-8 lg:px-16 gap-2 md:gap-6">
+          <div className="flex justify-center items-center mb-6 p-4 md:px-8 lg:px-16 gap-2 md:gap-6">
             <PriceCard text="상품 총액" price={totalAmount} />
             <p className="p-1">+</p>
             <PriceCard text="배송액" price={"3000"} />
