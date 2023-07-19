@@ -85,7 +85,7 @@ export default function MyCart() {
 
   return (
     <section className="flex flex-col w-full text-center p-8">
-      <h2 className="text-2xl font-bold my-4">나의 장바구니</h2>
+      <h2 className="text-2xl font-bold py-8">나의 장바구니</h2>
       {cartItems.length === 0 ? (
         <div className="flex flex-col">
           <p className="py-8">

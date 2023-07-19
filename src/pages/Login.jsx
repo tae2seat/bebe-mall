@@ -18,6 +18,7 @@ export default function Login() {
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
   };
+
   const handleSubmitLogin = async (e) => {
     e.preventDefault(); // 이벤트의 기본 동작을 중지시키는 메서드, 이룰 호출하면 이벤트에 대한 기본 동작이 실행되지 않고, 원하는 동작 수행 가능
     try {
@@ -36,9 +37,13 @@ export default function Login() {
     }
   };
 
+  const handleClickJoin = (e) => {
+    navigate("/join");
+  };
+
   return (
     <div className="w-full text-center">
-      <h2 className="text-2xl font-bold my-4">로그인 하기</h2>
+      <h2 className="text-2xl font-bold py-8">로그인 하기</h2>
       <form className="flex flex-col p-12" onSubmit={handleSubmitLogin}>
         <input
           type="email"
@@ -55,6 +60,9 @@ export default function Login() {
         />
         <Button text="로그인하기" />
       </form>
+      <div className="flex flex-col px-12 w-full">
+        <Button text="회원가입하기" onClick={handleClickJoin} />
+      </div>
     </div>
   );
 }

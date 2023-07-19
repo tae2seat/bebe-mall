@@ -8,6 +8,8 @@ export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const isAdmin = true;
+
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const [product, setProduct] = useState("");
@@ -101,13 +103,11 @@ export default function ProductDetail() {
   };
   return (
     <>
-      <p className="mx-12 mt-4 text-gray-700">{}</p>
+      <h2 className="w-full text-center text-2xl font bold py-8">
+        제품 상세페이지
+      </h2>
       <section className="flex flex-col md:flex-row p-4">
-        <img
-          className="w-full px-4 basis-7/12"
-          src={product.image}
-          alt="image"
-        />
+        <img className="w-96 mx-auto p-12" src={product.image} alt="image" />
         <div className="w-full basis-5/12 flex flex-col p-4">
           <h2 className="text-3xl font-bold py-2 ">{product.name}</h2>
           <p className="text-2xl font-bold py-2 border-b border-gary-400">
@@ -130,9 +130,12 @@ export default function ProductDetail() {
           <div className="flex flex-col gap-3 py-8">
             <Button
               text="장바구니에 추가"
-              onClick={() => addToCart(product, newOption)}
+              onClick={() => {
+                addToCart(product, newOption);
+                navigate("/carts");
+              }}
             />
-            <Button text="제품 수정하기" onClick={goToEdit} />
+            {isAdmin && <Button text="제품 수정하기" onClick={goToEdit} />}
           </div>
         </div>
       </section>
