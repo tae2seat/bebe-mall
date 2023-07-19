@@ -107,18 +107,27 @@ export default function ProductEdit() {
   };
 
   return (
-    <section className="flex flex-col mx-auto md:w-1/2  text-center">
-      <h2 className="text-2xl font bold py-8">제품 수정 후 등록</h2>
+    <section className="flex flex-col mx-auto">
+      <h2 className=" text-center text-2xl font bold py-8">
+        제품 수정 후 등록
+      </h2>
       {file ? (
         <img
-          className="w-96 mx-auto p-12"
+          className="w-80 h-80 md:w-96 md:h-96 mx-auto p-10 md:p-16 border-gray-100 border"
           src={URL.createObjectURL(file)}
           alt="file"
         />
       ) : (
-        <img className="w-96 mx-auto p-12" src={product?.image} alt="file" />
+        <img
+          className="w-80 h-80 md:w-96 md:h-96 mx-auto p-10 md:p-16 border-gray-100 border"
+          src={product?.image}
+          alt="file"
+        />
       )}
-      <form className="flex flex-col p-12" onSubmit={handleSubmitEditProduct}>
+      <form
+        className="flex flex-col md:mx-auto p-12"
+        onSubmit={handleSubmitEditProduct}
+      >
         <input
           type="file"
           accept="image/*"

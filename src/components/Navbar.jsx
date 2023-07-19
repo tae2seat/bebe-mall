@@ -17,7 +17,7 @@ export default function Navbar() {
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  const [isToggleOpen, setIsToggleOpen] = useState(true);
+  const [isToggleOpen, setIsToggleOpen] = useState(false);
 
   const handleToggleOpen = (e) => {
     setIsToggleOpen(!isToggleOpen);
@@ -52,7 +52,7 @@ export default function Navbar() {
         <h1 className="hidden md:block">Bebe</h1>
         <span>Mall</span>
       </Link>
-      <div className="flex gap-2">
+      <div className="flex gap-4">
         {isLoggedIn && (
           <Link className="" to="/profile">
             <User />
@@ -65,7 +65,7 @@ export default function Navbar() {
         )}
         <nav className="relative">
           <img
-            className=" cursor-pointer"
+            className=" cursor-pointer "
             src={menu}
             alt="menuBtn"
             onClick={handleToggleOpen}
@@ -76,7 +76,6 @@ export default function Navbar() {
                 <Link
                   to="/products"
                   className="block px-4 py-2 text-[#472f4e] hover:text-[#a56a94]"
-                  onClick={handleToggleOpen}
                 >
                   Products
                 </Link>
@@ -85,7 +84,6 @@ export default function Navbar() {
                 <Link
                   to="/carts"
                   className="block px-4 py-2 text-[#472f4e] hover:text-[#a56a94]"
-                  onClick={handleToggleOpen}
                 >
                   Carts
                 </Link>

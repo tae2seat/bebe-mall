@@ -102,12 +102,14 @@ export default function ProductDetail() {
     navigate(`/product/edit/${id}`);
   };
   return (
-    <div className="flex flex-col mx-auto md:w-1/2 ">
-      <h2 className="w-full text-center text-2xl font bold py-8">
-        제품 상세페이지
-      </h2>
+    <div className="flex flex-col mx-auto ">
+      <h2 className="text-center text-2xl font bold py-8">제품 상세페이지</h2>
       <section className="flex flex-col md:flex-row p-4">
-        <img className="w-96 mx-auto p-12" src={product.image} alt="image" />
+        <img
+          className="w-80 h-80 md:w-96 md:h-96 mx-auto p-10 md:p-16 border-gray-100 border"
+          src={product.image}
+          alt="image"
+        />
         <div className="w-full basis-5/12 flex flex-col p-4">
           <h2 className="text-3xl font-bold py-2 ">{product.name}</h2>
           <p className="text-2xl font-bold py-2 border-b border-gary-400">

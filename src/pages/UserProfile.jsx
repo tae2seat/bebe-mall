@@ -34,7 +34,7 @@ export default function UserProfile() {
         </div>
       )}
       {/* 이미지가 없을 떄는 기본 이미지가 보이게끔 만들기  */}
-      <div className="flex flex-col p-12 gap-2">
+      <div className="flex flex-col py-12 px-40 gap-2">
         <div className="p-4 outline-none border border-gray-300 ">
           <span className="text-lg">이름 : {name}</span>
         </div>
