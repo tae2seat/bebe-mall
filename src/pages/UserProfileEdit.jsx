@@ -88,7 +88,10 @@ export default function UserProfileEdit() {
         onChange={handleChangeNewProfileImage}
       />
       <button className="pt-4 text-sm cursor-pointer">사진 바꾸기</button>
-      <form className="flex flex-col p-12" onSubmit={handleSubmitUserEdit}>
+      <form
+        className="flex flex-col  py-12 px-12 md:px-80"
+        onSubmit={handleSubmitUserEdit}
+      >
         <input
           type="text"
           name="name"
