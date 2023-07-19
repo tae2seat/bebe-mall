@@ -38,7 +38,7 @@ export default function UserProfileEdit() {
   };
 
   const handleChangeNewProfileImage = (e) => {
-    setNewProfileImage(e.target.value);
+    setNewProfileImage(e.target.files[0]);
   };
 
   const handleSubmitUserEdit = async (e) => {
@@ -50,17 +50,19 @@ export default function UserProfileEdit() {
 
     const formData = new FormData();
 
+    formData.append("file", newProfileImage);
+    formData.append("name", editedName);
+    formData.append("birthDate", editedBirthDate);
+    formData.append("gender", editedGender);
+
     try {
       const response = await axios.put(
         "https://api.mybebe.net/api/v1/profile/edit",
-        {
-          name: editedName,
-          birthDate: editedBirthDate,
-          gender: editedGender,
-        },
+        formData,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -82,13 +84,27 @@ export default function UserProfileEdit() {
   return (
     <section className="flex flex-col mx-auto md:w-1/2 text-center">
       <h2 className="text-2xl font-bold py-8">User Profile Edit Page</h2>
-      <img
-        className="w-96 mx-auto p-12 "
-        src={avatar}
-        alt="profileImage"
-        onChange={handleChangeNewProfileImage}
-      />
-      <button className="pt-4 text-sm cursor-pointer">사진 바꾸기</button>
+      <form>
+        {newProfileImage ? (
+          <img
+            className="w-96 mx-auto p-12 object-contain "
+            src={URL.createObjectURL(newProfileImage)}
+            alt="profileImage"
+          />
+        ) : (
+          <img
+            className="w-96 mx-auto p-12 object-contain "
+            src={avatar}
+            alt="avatar"
+          />
+        )}
+        <input
+          className="w-2/3 p-1"
+          type="file"
+          accept="image/*"
+          onChange={handleChangeNewProfileImage}
+        />
+      </form>
       <form className="flex flex-col p-12" onSubmit={handleSubmitUserEdit}>
         <input
           type="text"

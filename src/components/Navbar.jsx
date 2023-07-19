@@ -7,6 +7,7 @@ import Button from "../components/buttons/Button";
 import User from "./User";
 import { authApi } from "../axios";
 import { logout } from "../redux/slices/authSlice";
+import menu from "../images/menu.png";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -15,6 +16,12 @@ export default function Navbar() {
   const isAdmin = true;
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  const [isToggleOpen, setIsToggleOpen] = useState(true);
+
+  const handleToggleOpen = (e) => {
+    setIsToggleOpen(!isToggleOpen);
+  };
 
   const handleLogout = async (e) => {
     try {
@@ -45,16 +52,9 @@ export default function Navbar() {
         <h1 className="hidden md:block">Bebe</h1>
         <span>Mall</span>
       </Link>
-      <nav className="flex items-center gap-4 font-semibold ">
-        <Link to="/products">Products</Link>
-        <Link to="/carts">Carts</Link>
-        {isAdmin && (
-          <Link to="/products/new" className="text-2xl">
-            <BsFillPencilFill />
-          </Link>
-        )}
+      <div className="flex gap-2">
         {isLoggedIn && (
-          <Link to="/profile">
+          <Link className="" to="/profile">
             <User />
           </Link>
         )}
@@ -63,7 +63,47 @@ export default function Navbar() {
         ) : (
           <Button onClick={handleLogin} text="Login" />
         )}
-      </nav>
+        <nav className="relative">
+          <img
+            className=" cursor-pointer"
+            src={menu}
+            alt="menuBtn"
+            onClick={handleToggleOpen}
+          />
+          {isToggleOpen && (
+            <ul className="absolute top-full -left-24 -right-2 mt-2 p-4 bg-rose-50 opacity-70 rounded shadow-lg ">
+              <li>
+                <Link
+                  to="/products"
+                  className="block px-4 py-2 text-[#472f4e] hover:text-[#a56a94]"
+                  onClick={handleToggleOpen}
+                >
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/carts"
+                  className="block px-4 py-2 text-[#472f4e] hover:text-[#a56a94]"
+                  onClick={handleToggleOpen}
+                >
+                  Carts
+                </Link>
+              </li>
+              {isAdmin && (
+                <li>
+                  <Link
+                    to="/products/new"
+                    className="block px-4 py-2 text-[#472f4e] hover:text-[#a56a94]"
+                  >
+                    <BsFillPencilFill />
+                  </Link>
+                </li>
+              )}
+            </ul>
+          )}
+        </nav>
+      </div>
     </header>
   );
 }
