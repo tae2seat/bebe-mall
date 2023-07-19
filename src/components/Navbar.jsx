@@ -52,7 +52,7 @@ export default function Navbar() {
         <h1 className="hidden md:block">Bebe</h1>
         <span>Mall</span>
       </Link>
-      <div className="flex gap-4">
+      <div className="flex gap-2 md:gap-4">
         {isLoggedIn && (
           <Link className="" to="/profile">
             <User />
