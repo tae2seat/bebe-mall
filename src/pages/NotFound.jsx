@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../components/buttons/Button";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
-import babyFoot from "../lotties/baby foot.json";
+import babyFoot from "../lottie/baby foot.json";
 
 export default function NotFound() {
   const navigate = useNavigate();
