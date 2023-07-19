@@ -14,7 +14,7 @@ export default function ProductCard({ item }) {
   return (
     <li
       onClick={handleClickProduct}
-      className="w-72 h-96 mx-auto my-2 rounded-lg shadow-md overflow-hidden cursor-pointer transition-all hover:scale-105  "
+      className="w-72 h-96 mx-auto rounded-lg shadow-md overflow-hidden cursor-pointer transition-all hover:scale-105  "
     >
       <img
         className="h-2/3 mx-auto p-8 object-cover "
