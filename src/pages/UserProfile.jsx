@@ -34,18 +34,18 @@ export default function UserProfile() {
         </div>
       )}
       {/* 이미지가 없을 떄는 기본 이미지가 보이게끔 만들기  */}
-      <div className="flex flex-col py-12 px-12 md:px-80">
-        <div className="p-4 outline-none border border-gray-300 my-1">
+      <div className="flex flex-col py-12 px-12 md:px-80 gap-2">
+        <div className="p-4 outline-none border border-gray-300 ">
           <span className="text-lg">이름 : {name}</span>
         </div>
-        <div className="p-4 outline-none border border-gray-300 my-1">
+        <div className="p-4 outline-none border border-gray-300 ">
           <span className="text-lg">성별 : {gender}</span>
         </div>
-        <div className="p-4 outline-none border border-gray-300 my-1">
+        <div className="p-4 outline-none border border-gray-300 mb-6  ">
           <span className="text-lg">생년월일 : {birthDate}</span>
         </div>
+        <Button text="프로필 수정하기" onClick={handleClickEdit} />
       </div>
-      <Button text="프로필 수정하기" onClick={handleClickEdit} />
     </section>
   );
 }

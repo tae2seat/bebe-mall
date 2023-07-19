@@ -107,6 +107,7 @@ export default function UserProfileEdit() {
           onChange={handleChangeNewBirthDate}
         />
         <input
+          className="mb-6"
           type="text"
           name="gender"
           placeholder="성별"
