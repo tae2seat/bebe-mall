@@ -12,7 +12,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const isAdmin = false;
+  const isAdmin = true;
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
@@ -48,12 +48,10 @@ export default function Navbar() {
       <nav className="flex items-center gap-4 font-semibold ">
         <Link to="/products">Products</Link>
         <Link to="/carts">Carts</Link>
-        {isAdmin === true ? (
+        {isAdmin && (
           <Link to="/products/new" className="text-2xl">
             <BsFillPencilFill />
           </Link>
-        ) : (
-          ""
         )}
         {isLoggedIn && (
           <Link to="/profile">

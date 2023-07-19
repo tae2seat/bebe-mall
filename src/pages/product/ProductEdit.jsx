@@ -107,7 +107,7 @@ export default function ProductEdit() {
   };
 
   return (
-    <section className="w-full text-center">
+    <section className="flex flex-col mx-auto md:w-1/2  text-center">
       <h2 className="text-2xl font bold py-8">제품 수정 후 등록</h2>
       {file ? (
         <img

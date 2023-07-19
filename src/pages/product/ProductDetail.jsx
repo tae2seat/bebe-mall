@@ -102,7 +102,7 @@ export default function ProductDetail() {
     navigate(`/product/edit/${id}`);
   };
   return (
-    <>
+    <div className="flex flex-col mx-auto md:w-1/2 ">
       <h2 className="w-full text-center text-2xl font bold py-8">
         제품 상세페이지
       </h2>
@@ -139,7 +139,7 @@ export default function ProductDetail() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 

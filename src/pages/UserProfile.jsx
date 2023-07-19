@@ -24,7 +24,7 @@ export default function UserProfile() {
   };
 
   return (
-    <section className="w-full text-center">
+    <section className="flex flex-col mx-auto md:w-1/2  text-center">
       <h2 className="text-2xl font-bold py-8">User Profile Page</h2>
       {avatar ? (
         <img className="w-96 mx-auto p-12 " src={avatar} alt="profileImage" />
@@ -34,7 +34,7 @@ export default function UserProfile() {
         </div>
       )}
       {/* 이미지가 없을 떄는 기본 이미지가 보이게끔 만들기  */}
-      <div className="flex flex-col py-12 px-12 md:px-80 gap-2">
+      <div className="flex flex-col p-12 gap-2">
         <div className="p-4 outline-none border border-gray-300 ">
           <span className="text-lg">이름 : {name}</span>
         </div>

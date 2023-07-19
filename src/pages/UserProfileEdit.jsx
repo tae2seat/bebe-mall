@@ -80,7 +80,7 @@ export default function UserProfileEdit() {
   }
 
   return (
-    <section className="w-full text-center">
+    <section className="flex flex-col mx-auto md:w-1/2 text-center">
       <h2 className="text-2xl font-bold py-8">User Profile Edit Page</h2>
       <img
         className="w-96 mx-auto p-12 "
@@ -89,10 +89,7 @@ export default function UserProfileEdit() {
         onChange={handleChangeNewProfileImage}
       />
       <button className="pt-4 text-sm cursor-pointer">사진 바꾸기</button>
-      <form
-        className="flex flex-col  py-12 px-12 md:px-80"
-        onSubmit={handleSubmitUserEdit}
-      >
+      <form className="flex flex-col p-12" onSubmit={handleSubmitUserEdit}>
         <input
           type="text"
           name="name"
