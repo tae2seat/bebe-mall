@@ -4,6 +4,7 @@ import { getProfile } from "../redux/slices/profileSlice";
 import Button from "../components/buttons/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import NotFound from "./NotFound";
 
 export default function UserProfileEdit() {
   const dispatch = useDispatch();
@@ -75,7 +76,7 @@ export default function UserProfileEdit() {
   }
 
   if (isError) {
-    return <div>Error!!!</div>;
+    return <NotFound />;
   }
 
   return (
