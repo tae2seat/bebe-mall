@@ -44,7 +44,7 @@ export default function Login() {
   return (
     <div className="flex flex-col mx-auto md:w-1/2  text-center">
       <h2 className="text-2xl font-bold py-8">로그인 하기</h2>
-      <form className="flex flex-col py-12 px-40" onSubmit={handleSubmitLogin}>
+      <form className="flex flex-col p-12" onSubmit={handleSubmitLogin}>
         <input
           type="email"
           name="이메일"
