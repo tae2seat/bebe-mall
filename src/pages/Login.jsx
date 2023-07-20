@@ -4,10 +4,16 @@ import { authApi } from "../axios/index";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../redux/slices/authSlice";
+import { useForm } from "react-hook-form";
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,8 +25,7 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
-  const handleSubmitLogin = async (e) => {
-    e.preventDefault(); // 이벤트의 기본 동작을 중지시키는 메서드, 이룰 호출하면 이벤트에 대한 기본 동작이 실행되지 않고, 원하는 동작 수행 가능
+  const login = async (e) => {
     try {
       //try-catch 문을 사용하면 예기치 않은 상황이 발생할 때 모니커링 할 수 있고 적절하게 처리할 수 있음
       const response = await authApi.post("/login", {
@@ -44,20 +49,33 @@ export default function Login() {
   return (
     <div className="flex flex-col mx-auto md:w-1/3  text-center">
       <h2 className="text-2xl font-bold py-8">로그인 하기</h2>
-      <form className="flex flex-col p-12" onSubmit={handleSubmitLogin}>
+      <form className="flex flex-col p-12" onSubmit={handleSubmit(login)}>
         <input
           type="email"
+          {...register("email", {
+            required: "이메일은 필수 입력 사항입니다.",
+            pattern: {
+              value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+              message: "유효한 이메일 주소를 입력해주세요.",
+            },
+          })}
           name="이메일"
           placeholder="이메일"
           onChange={handleChangeEmail}
         />
+        {errors.email && <p>{errors.email.message}</p>}
         <input
           className="mb-6"
           type="password"
+          {...register("password", {
+            required: "비밀번호는 필수 입력 사항입니다.",
+            minLength: { value: 8, message: "8글자 이상 써주세요." },
+          })}
           name="비밀번호"
           placeholder="비밀번호"
           onChange={handleChangePassword}
         />
+        {errors.password && <p>{errors.password.message}</p>}
         <Button text="로그인하기" />
       </form>
       <button className="underline" onClick={handleClickJoin}>
