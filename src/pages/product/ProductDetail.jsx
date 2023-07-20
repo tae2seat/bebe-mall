@@ -8,8 +8,7 @@ export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const isAdmin = true;
-
+  const { isAdmin } = useSelector((state) => state.profile);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const [product, setProduct] = useState("");
@@ -137,7 +136,9 @@ export default function ProductDetail() {
                 navigate("/carts");
               }}
             />
-            {isAdmin && <Button text="제품 수정하기" onClick={goToEdit} />}
+            {isAdmin === 0 && (
+              <Button text="제품 수정하기" onClick={goToEdit} />
+            )}
           </div>
         </div>
       </section>

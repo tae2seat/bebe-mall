@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Button from "../../components/buttons/Button";
 
 export default function ProductEdit() {
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -100,7 +101,9 @@ export default function ProductEdit() {
           },
         }
       );
-      console.log("성공!!");
+      if (response.status === 200) {
+        navigate(`/product/edit/${id}`);
+      }
     } catch (error) {
       console.log(error);
     }

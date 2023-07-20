@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Button from "../../components/buttons/Button";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function NewProduct() {
+  const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const [productName, setProductName] = useState("");
@@ -51,6 +53,9 @@ export default function NewProduct() {
         }
       );
       console.log("성공");
+      if (response.status === 200) {
+        navigate("/products");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -74,7 +79,6 @@ export default function NewProduct() {
           },
         }
       );
-      console.log(response.data);
       setCategories(response.data);
     } catch (error) {
       console.log(error);

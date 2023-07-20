@@ -33,6 +33,7 @@ export default function Join() {
   };
 
   const join = async (e) => {
+    e.preventDefault();
     try {
       const response = await authApi.post("/join", {
         name,

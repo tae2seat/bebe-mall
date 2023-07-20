@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BsFillPencilFill } from "react-icons/bs";
 import babyFace from "../images/ICON_08.png";
@@ -13,8 +13,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const isAdmin = true;
-
+  const { isAdmin } = useSelector((state) => state.profile);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const [isToggleOpen, setIsToggleOpen] = useState(false);
@@ -88,7 +87,7 @@ export default function Navbar() {
                   Carts
                 </Link>
               </li>
-              {isAdmin && (
+              {isAdmin === 0 && (
                 <li>
                   <Link
                     to="/products/new"
