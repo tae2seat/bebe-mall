@@ -27,13 +27,13 @@ export default function Home() {
   };
 
   return (
-    <>
+    <div>
       <Banner />
-      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8  py-10 md:py-20 ">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-10 md:py-20 ">
         {products.items?.map((item, id) => (
           <ProductCard key={id} item={item} />
         ))}
       </ul>
-    </>
+    </div>
   );
 }
