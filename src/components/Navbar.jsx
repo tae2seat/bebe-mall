@@ -14,7 +14,7 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const { isAdmin } = useSelector((state) => state.profile);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const { isLoggedIn, userRole } = useSelector((state) => state.auth);
 
   const [isToggleOpen, setIsToggleOpen] = useState(false);
 
@@ -87,7 +87,7 @@ export default function Navbar() {
                   Carts
                 </Link>
               </li>
-              {isAdmin === 0 && (
+              {isAdmin === userRole && (
                 <li>
                   <Link
                     to="/products/new"

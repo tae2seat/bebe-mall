@@ -40,7 +40,7 @@ export default function ProductEdit() {
       getProductDetail();
       getCategory();
     }
-  }, [isLoggedIn]);
+  }, []);
 
   const getProductDetail = async () => {
     try {
@@ -136,6 +136,7 @@ export default function ProductEdit() {
           accept="image/*"
           name="file"
           required
+          defaultValue={file}
           onChange={handleChangeFile}
         />
         <input

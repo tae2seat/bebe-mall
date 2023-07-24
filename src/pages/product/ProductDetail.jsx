@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../components/buttons/Button";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -9,7 +9,7 @@ export default function ProductDetail() {
   const navigate = useNavigate();
 
   const { isAdmin } = useSelector((state) => state.profile);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const { userRole } = useSelector((state) => state.auth);
 
   const [product, setProduct] = useState("");
   const [options, setOptions] = useState([]);
@@ -35,11 +35,9 @@ export default function ProductDetail() {
   };
 
   useEffect(() => {
-    if (isLoggedIn) {
-      getProductDetail();
-      getOptions();
-    }
-  }, [isLoggedIn]);
+    getProductDetail();
+    getOptions();
+  }, []);
 
   const getProductDetail = async () => {
     try {
@@ -106,15 +104,15 @@ export default function ProductDetail() {
       <section className="flex flex-col md:flex-row p-4">
         <img
           className="w-80 h-80 md:w-96 md:h-96 mx-auto p-10 md:p-16 border-gray-100 border"
-          src={product.image}
+          src={product?.image}
           alt="image"
         />
         <div className="w-full basis-5/12 flex flex-col p-4">
-          <h2 className="text-3xl font-bold py-2 ">{product.name}</h2>
+          <h2 className="text-3xl font-bold py-2 ">{product?.name}</h2>
           <p className="text-2xl font-bold py-2 border-b border-gary-400">
-            {product.price}
+            {product?.price}
           </p>
-          <p className="text-lg py-4">{product.description}</p>
+          <p className="text-lg py-4">{product?.description}</p>
           <div className="flex items-center">
             <label className="text-brand font-bold">옵션</label>
             <select
@@ -123,7 +121,7 @@ export default function ProductDetail() {
             >
               {options?.map((option) => (
                 <option key={option.id} value={option.id}>
-                  {option.name}
+                  {option?.name}
                 </option>
               ))}
             </select>
@@ -136,7 +134,7 @@ export default function ProductDetail() {
                 navigate("/carts");
               }}
             />
-            {isAdmin === 0 && (
+            {isAdmin === userRole && (
               <Button text="제품 수정하기" onClick={goToEdit} />
             )}
           </div>
