@@ -27,10 +27,13 @@ export default function Login() {
         email,
         password,
       });
+      const { isAdmin, userRole } = response.data;
       //로컬스토리지에 저장하는 이유? 웹페이지를 새로 고침하거나 브라우저가 종료한 후에도 데이터가 유지되게 하기 위해
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
-      dispatch(login());
+      localStorage.setItem("isAdmin", isAdmin);
+      localStorage.setItem("userRole", userRole);
+      dispatch(login({ isAdmin: true, userRole: "admin" }));
       navigate("/");
     } catch (error) {
       console.log(error);

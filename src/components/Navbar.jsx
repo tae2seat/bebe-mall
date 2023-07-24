@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BsFillPencilFill } from "react-icons/bs";
 import babyFace from "../images/ICON_08.png";
@@ -12,9 +12,8 @@ import menu from "../images/menu.png";
 export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const { isAdmin } = useSelector((state) => state.profile);
-  const { isLoggedIn, userRole } = useSelector((state) => state.auth);
+  const { isLoggedIn, isAdmin, userRole } = useSelector((state) => state.auth);
+  console.log(isLoggedIn, isAdmin, userRole);
 
   const [isToggleOpen, setIsToggleOpen] = useState(false);
 
@@ -87,7 +86,7 @@ export default function Navbar() {
                   Carts
                 </Link>
               </li>
-              {isAdmin === userRole && (
+              {isAdmin && userRole === "admin" && (
                 <li>
                   <Link
                     to="/products/new"

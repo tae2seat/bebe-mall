@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   currentUser: null,
   isLoggedIn: !!localStorage.getItem("accessToken"),
-  userRole: null,
+  isAdmin: localStorage.getItem("isAdmin") === "true",
+  userRole: localStorage.getItem("userRole") || null,
 };
 
 const authSlice = createSlice({
@@ -11,13 +12,24 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
+      console.log(action);
       state.isLoggedIn = true;
       state.currentUser = action.payload;
-      state.userRole = 0;
+      state.isAdmin = action.payload.isAdmin === true;
+
+      if (state.isAdmin) {
+        state.userRole = "admin";
+      }
+      state.userRole = action.payload.userRole || null;
+      localStorage.setItem("isAdmin", state.isAdmin);
+      localStorage.setItem("userRole", state.userRole);
     },
     logout: (state) => {
       (state.isLoggedIn = false), (state.currentUser = null);
-      state.userRole = 1;
+      state.isAdmin = false;
+      state.userRole = null;
+      localStorage.removeItem("isAdmin");
+      localStorage.removeItem("userRole");
     },
   },
 });
