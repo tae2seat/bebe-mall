@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Button from "../../components/buttons/Button";
+import { useForm } from "react-hook-form";
 
 export default function ProductEdit() {
   const navigate = useNavigate();
@@ -101,6 +102,7 @@ export default function ProductEdit() {
           },
         }
       );
+      console.log(response.status);
       if (response.status === 200) {
         navigate(`/product/edit/${id}`);
       }

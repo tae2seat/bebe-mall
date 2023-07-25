@@ -7,9 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const { isAdmin } = useSelector((state) => state.profile);
-  const { userRole } = useSelector((state) => state.auth);
+  const { isAdmin, userRole } = useSelector((state) => state.auth);
 
   const [product, setProduct] = useState("");
   const [options, setOptions] = useState([]);
@@ -134,7 +132,7 @@ export default function ProductDetail() {
                 navigate("/carts");
               }}
             />
-            {isAdmin === userRole && (
+            {isAdmin && userRole === "admin" && (
               <Button text="제품 수정하기" onClick={goToEdit} />
             )}
           </div>
