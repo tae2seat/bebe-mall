@@ -43,7 +43,6 @@ const profileSlice = createSlice({
         state.isError = false;
       })
       .addCase(getProfile.fulfilled, (state, action) => {
-        console.log(action);
         state.name = action.payload.name;
         state.email = action.payload.email;
         state.gender = action.payload.gender;

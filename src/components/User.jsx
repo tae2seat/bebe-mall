@@ -33,7 +33,6 @@ export default function User() {
           },
         }
       );
-      console.log(response.data.avatar);
       setProfileImage(response.data.avatar);
     } catch (error) {
       console.log(error);

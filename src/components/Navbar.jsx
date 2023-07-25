@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BsFillPencilFill } from "react-icons/bs";
 import babyFace from "../images/ICON_08.png";
@@ -13,12 +13,19 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoggedIn, isAdmin, userRole } = useSelector((state) => state.auth);
-  console.log(isLoggedIn, isAdmin, userRole);
 
-  const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const [isNavbarVisible, setNavbarVisible] = useState(false);
+  const timeOutRef = useRef();
 
-  const handleToggleOpen = (e) => {
-    setIsToggleOpen(!isToggleOpen);
+  const handleMouseEnter = () => {
+    clearTimeout(timeOutRef.current);
+    setNavbarVisible(true);
+  };
+  const handleMouseLeave = () => {
+    clearTimeout(timeOutRef.current);
+    timeOutRef.current = setTimeout(() => {
+      setNavbarVisible(false);
+    }, 300);
   };
 
   const handleLogout = async (e) => {
@@ -61,15 +68,16 @@ export default function Navbar() {
         ) : (
           <Button onClick={handleLogin} text="Login" />
         )}
-        <nav className="relative">
-          <img
-            className=" cursor-pointer "
-            src={menu}
-            alt="menuBtn"
-            onClick={handleToggleOpen}
-          />
-          {isToggleOpen && (
-            <ul className="absolute top-full -left-24 -right-2 mt-2 p-4 bg-rose-50 opacity-70 rounded shadow-lg ">
+        <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+          <img className=" cursor-pointer " src={menu} alt="menuBtn" />
+          <nav
+            className={`relative text-center ${
+              isNavbarVisible ? "" : "hidden"
+            }`}
+          >
+            <ul
+              className={`absolute  top-full  -right-2 mt-2 py-4 px-4 md:px-10 bg-rose-50 opacity-70 rounded-b-lg shadow-lg `}
+            >
               <li>
                 <Link
                   to="/products"
@@ -87,7 +95,7 @@ export default function Navbar() {
                 </Link>
               </li>
               {isAdmin && userRole === "admin" && (
-                <li>
+                <li className="flex justify-center">
                   <Link
                     to="/products/new"
                     className="block px-4 py-2 text-[#472f4e] hover:text-[#a56a94]"
@@ -97,11 +105,9 @@ export default function Navbar() {
                 </li>
               )}
             </ul>
-          )}
-        </nav>
+          </nav>
+        </div>
       </div>
     </header>
   );
 }
-
-//admin 일 떄 새로운 상품 등록 버튼 뜨게하기
