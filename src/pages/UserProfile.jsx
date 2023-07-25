@@ -28,7 +28,7 @@ export default function UserProfile() {
       <h2 className="text-2xl font-bold py-8">User Profile Page</h2>
       {avatar ? (
         <img
-          className="w-96 h-96 mx-auto p-1 object-contain  border "
+          className="w-96 h-96 mx-auto p-12 object-contain  border "
           src={avatar}
           alt="profileImage"
         />

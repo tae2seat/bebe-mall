@@ -142,7 +142,12 @@ export default function MyCart() {
             <p className="p-1">=</p>
             <PriceCard text="총액" price={totalAmount + 3000} />
           </div>
-          <Button text="주문하기" />
+          <Button
+            text="주문하기"
+            onClick={() => {
+              alert("주문이 완료되었습니다.");
+            }}
+          />
         </div>
       )}{" "}
     </section>
