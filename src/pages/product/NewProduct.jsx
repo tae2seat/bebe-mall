@@ -90,7 +90,7 @@ export default function NewProduct() {
       <h2 className="text-center text-2xl font-bold  py-8">새로운 제품 등록</h2>
       {file && (
         <img
-          className="w-80 h-80 md:w-96 md:h-96 mx-auto p-10 md:p-16 border-gray-100 border"
+          className="w-96 h-96 mx-auto mb-4 p-12 object-contain border"
           src={URL.createObjectURL(file)}
           alt="file"
         />

@@ -5,69 +5,80 @@ import Button from "../components/buttons/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import NotFound from "./NotFound";
+import { useForm } from "react-hook-form";
 
 export default function UserProfileEdit() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const { name, birthDate, gender, avatar, isLoading, isError } = useSelector(
     (state) => state.profile
   );
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
 
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(getProfile());
     }
-  }, [isLoggedIn]);
+    setValue("name", name);
+    setValue("gender", gender);
+    setValue("birthDate", birthDate);
+  }, [setValue, name, gender, birthDate]);
 
-  const [newName, setNewName] = useState("");
-  const [newBirthDate, setNewBirthDate] = useState("");
-  const [newGender, setNewGender] = useState("");
-  const [newProfileImage, setNewProfileImage] = useState(null);
+  const [newAvatar, setNewAvatar] = useState(null);
 
-  const handleChangeNewName = (e) => {
-    setNewName(e.target.value);
+  const handleNewAvatarChange = (e) => {
+    setNewAvatar(e.target.files[0]);
   };
 
-  const handleChangeNewBirthDate = (e) => {
-    setNewBirthDate(e.target.value);
-  };
-  const handleChangeNewGender = (e) => {
-    setNewGender(e.target.value);
-  };
-
-  const handleChangeNewProfileImage = (e) => {
-    setNewProfileImage(e.target.files[0]);
-  };
-
-  const handleSubmitUserEdit = async (e) => {
+  const onSubmitAvatar = async (data, e) => {
     e.preventDefault();
-    // 수정하고 submit 했을 때 에러나는 이유 : 수정하지 않으면 기존 값을 반영하고 수정했으면 수정한 값을 반영
-    const editedName = newName === "" ? name : newName;
-    const editedBirthDate = newBirthDate === "" ? birthDate : newBirthDate;
-    const editedGender = newGender === "" ? gender : newGender;
+    if (newAvatar) {
+      const formData = new FormData();
 
-    const formData = new FormData();
+      formData.append("file", newAvatar);
 
-    formData.append("file", newProfileImage);
-    formData.append("name", editedName);
-    formData.append("birthDate", editedBirthDate);
-    formData.append("gender", editedGender);
+      try {
+        const response = await axios.put(
+          "https://api.mybebe.net/api/v1/profile/avatar",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        alert("사진 업로드 성공!");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
+  const handleSubmitUserEdit = async (data) => {
     try {
       const response = await axios.put(
         "https://api.mybebe.net/api/v1/profile/edit",
-        formData,
+        {
+          ...data,
+        },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            "Content-Type": "multipart/form-data",
           },
         }
       );
       console.log("성공!!");
-      navigate("/profile");
+      if (response.status === 200) {
+        alert("수정이 완료되었습니다.");
+        navigate("/profile");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -82,55 +93,66 @@ export default function UserProfileEdit() {
   }
 
   return (
-    <section className="flex flex-col mx-auto md:w-1/3 text-center">
+    <section className="flex flex-col mx-auto md:w-1/2 text-center">
       <h2 className="text-2xl font-bold py-8">User Profile Edit Page</h2>
-      <form>
-        {newProfileImage ? (
+      <form onSubmit={handleSubmit(onSubmitAvatar)}>
+        {newAvatar ? (
           <img
-            className="w-96 mx-auto p-12 object-contain "
-            src={URL.createObjectURL(newProfileImage)}
+            className="w-96 h-96 mx-auto mb-4 p-12 object-contain border  "
+            src={URL.createObjectURL(newAvatar)}
             alt="profileImage"
           />
         ) : (
           <img
-            className="w-96 mx-auto p-12 object-contain "
+            className="w-96 h-96 mx-auto mb-4 p-12 object-contain  border "
             src={avatar}
             alt="avatar"
           />
         )}
-        <input
-          className="w-1/2 p-1"
-          type="file"
-          accept="image/*"
-          onChange={handleChangeNewProfileImage}
-        />
+        <div className="flex flex-col justify-center items-center">
+          <input
+            className="w-1/2 p-1"
+            type="file"
+            accept="image/*"
+            onChange={handleNewAvatarChange}
+          />
+          <button className="text-gray-400 hover:underline hover:text-gray-800 py-2">
+            이미지 수정하기
+          </button>
+        </div>
       </form>
       <form
         className="flex flex-col  p-8 md:p-12  gap-2"
-        onSubmit={handleSubmitUserEdit}
+        onSubmit={handleSubmit(handleSubmitUserEdit)}
       >
         <input
+          {...register("name", {
+            required: "이름은 필수 입력 사항입니다. ",
+          })}
           type="text"
-          name="name"
-          placeholder="이름"
           defaultValue={name}
-          onChange={handleChangeNewName}
         />
+        {errors.name && <p>{errors.name.message}</p>}
         <input
+          {...register("birthDate", {
+            required: "생년월일은 필수 입력 사항입니다.",
+          })}
           type="date"
-          name="birthDate"
-          placeholder="생년월일"
           defaultValue={birthDate}
-          onChange={handleChangeNewBirthDate}
         />
-        <input
-          className="mb-6"
-          type="text"
-          name="gender"
-          placeholder="성별"
+        {errors.birthDate && <p>{errors.birthDate.message}</p>}
+        <select
+          className="p-4 outline-none border border-gray-300 my-1"
+          {...register("gender", {
+            required: "성별은 필수 입력 사항입니다.",
+          })}
           defaultValue={gender}
-          onChange={handleChangeNewGender}
-        />
+        >
+          <option value="">Select gender</option>
+          <option value="남자">남자</option>
+          <option value="여자">여자</option>
+        </select>
+        {errors.gender && <p>{errors.gender.message}</p>}
         <Button text="수정완료하기" />
       </form>
     </section>
