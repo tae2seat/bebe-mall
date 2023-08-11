@@ -96,8 +96,9 @@ export default function ProductDetail() {
   const goToEdit = (e) => {
     navigate(`/product/edit/${id}`);
   };
+
   return (
-    <div className="flex flex-col mx-auto ">
+    <div className="mx-auto md:w-2/3 ">
       <h2 className="text-center text-2xl font bold py-8">제품 상세페이지</h2>
       <section className="flex flex-col md:flex-row p-4">
         <img
@@ -124,7 +125,7 @@ export default function ProductDetail() {
               ))}
             </select>
           </div>
-          <div className="flex flex-col gap-3 py-8">
+          <div className="flex flex-col py-8">
             <Button
               text="장바구니에 추가"
               onClick={() => {

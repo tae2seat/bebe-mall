@@ -54,7 +54,6 @@ export default function ProductEdit() {
       console.log(error);
     }
   };
-  console.log(cId);
 
   const getCategory = async () => {
     try {
@@ -102,7 +101,7 @@ export default function ProductEdit() {
   };
 
   return (
-    <section className="flex flex-col mx-auto">
+    <section className="mx-auto md:w-[500px]">
       <h2 className=" text-center text-2xl font bold py-8">
         제품 수정 후 등록
       </h2>
@@ -144,7 +143,7 @@ export default function ProductEdit() {
           </select>
         </div>
         <input
-          className="mb-6"
+          className="mb-10"
           type="text"
           name="description"
           defaultValue={description}

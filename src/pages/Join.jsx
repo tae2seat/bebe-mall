@@ -49,7 +49,7 @@ export default function Join() {
   };
 
   return (
-    <div className="flex flex-col mx-auto md:w-1/3 text-center">
+    <div className="mx-auto md:w-[500px] text-center">
       <h2 className="text-2xl font-bold py-8">Bebe Mall 회원가입</h2>
       <form className="flex flex-col p-12" onSubmit={handleSubmit(join)}>
         <input
@@ -99,7 +99,7 @@ export default function Join() {
         />
         {errors.date && <p>{errors.date.message}</p>}
         <select
-          className="p-4 outline-none border border-gray-300 my-1 text-gray-400"
+          className="p-4 outline-none border border-gray-300 my-1 text-gray-400 mb-10"
           {...register("gender", {
             required: "성별은 필수 선택 사항입니다.",
           })}

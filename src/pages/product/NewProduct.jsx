@@ -86,7 +86,7 @@ export default function NewProduct() {
   };
 
   return (
-    <section className="flex flex-col mx-auto ">
+    <section className="mx-auto md:w-[500px]">
       <h2 className="text-center text-2xl font-bold  py-8">새로운 제품 등록</h2>
       {file && (
         <img
@@ -137,7 +137,7 @@ export default function NewProduct() {
           </select>
         </div>
         <input
-          className="mb-6"
+          className="mb-10"
           type="text"
           name="description"
           value={description || ""}

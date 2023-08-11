@@ -45,7 +45,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col mx-auto md:w-1/3  text-center">
+    <div className="mx-auto md:w-[500px] text-center">
       <h2 className="text-2xl font-bold py-8">로그인 하기</h2>
       <form className="flex flex-col p-12" onSubmit={handleLogin}>
         <input
@@ -55,7 +55,7 @@ export default function Login() {
           onChange={handleChangeEmail}
         />
         <input
-          className="mb-6"
+          className="mb-10"
           type="password"
           name="비밀번호"
           placeholder="비밀번호"

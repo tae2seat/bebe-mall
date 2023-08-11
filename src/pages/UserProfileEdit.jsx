@@ -93,7 +93,7 @@ export default function UserProfileEdit() {
   }
 
   return (
-    <section className="flex flex-col mx-auto md:w-1/2 text-center">
+    <section className="mx-auto md:w-[500px] text-center">
       <h2 className="text-2xl font-bold py-8">User Profile Edit Page</h2>
       <form onSubmit={handleSubmit(onSubmitAvatar)}>
         {newAvatar ? (
@@ -142,7 +142,7 @@ export default function UserProfileEdit() {
         />
         {errors.birthDate && <p>{errors.birthDate.message}</p>}
         <select
-          className="p-4 outline-none border border-gray-300 my-1"
+          className="p-4 outline-none border border-gray-300 my-1 mb-8"
           {...register("gender", {
             required: "성별은 필수 입력 사항입니다.",
           })}

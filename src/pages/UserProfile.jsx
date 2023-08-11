@@ -24,7 +24,7 @@ export default function UserProfile() {
   };
 
   return (
-    <section className="flex flex-col mx-auto md:w-1/2  text-center">
+    <section className=" mx-auto md:w-[500px]  text-center">
       <h2 className="text-2xl font-bold py-8">User Profile Page</h2>
       {avatar ? (
         <img

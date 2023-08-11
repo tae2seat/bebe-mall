@@ -81,7 +81,7 @@ export default function MyCart() {
   };
 
   return (
-    <section className="flex flex-col mx-auto md:w-1/2 text-center p-8">
+    <section className="mx-auto md:w-1/2 text-center p-8">
       <h2 className="text-2xl font-bold py-8">나의 장바구니</h2>
       {cartItems.length === 0 ? (
         <div className="flex flex-col">
@@ -102,7 +102,7 @@ export default function MyCart() {
               <li key={id} className="flex justify-between my-4 items-center">
                 <img
                   src={product.image}
-                  className="w-12 sm:w-24 md:w-48 rounded-lg"
+                  className="w-16 sm:w-24 md:w-48 rounded-lg md:p-4"
                 />
                 <div className="flex-1 flex justify-between ml-4">
                   <div className="basis-3/5">

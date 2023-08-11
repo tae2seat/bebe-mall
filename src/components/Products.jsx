@@ -27,7 +27,7 @@ export default function Products() {
 
   // 로딩 중일 때 에러 뜰 때 경우
   return (
-    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8  py-10 md:py-20 ">
+    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8  py-10 md:py-20 ">
       {products.items?.map((item, id) => (
         <ProductCard key={id} item={item} />
       ))}
