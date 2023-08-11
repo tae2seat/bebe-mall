@@ -15,7 +15,6 @@ export default function ProductEdit() {
   const [cId, setCId] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [file, setFile] = useState("");
 
   const handleChangeProductName = (e) => {
     setProductName(e.target.value);
@@ -29,9 +28,6 @@ export default function ProductEdit() {
   };
   const handleChangeDescription = (e) => {
     setDescription(e.target.value);
-  };
-  const handleChangeFile = (e) => {
-    setFile(e.target.files[0]);
   };
 
   useEffect(() => {
@@ -49,12 +45,12 @@ export default function ProductEdit() {
           },
         }
       );
+      console.log(response.data);
       setProduct(response.data);
       setProductName(response.data.name);
       setCId(response.data.item_categories[0].id);
       setPrice(response.data.price);
       setDescription(response.data.description);
-      setFile(response.data.file);
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +67,6 @@ export default function ProductEdit() {
         }
       );
       setCategories(response.data);
-      console.log(categories);
     } catch (error) {
       console.log(error);
     }
@@ -83,7 +78,6 @@ export default function ProductEdit() {
     const formDate = new FormData();
 
     formDate.append("name", productName);
-    formDate.append("file", file);
     formDate.append("price", price);
     formDate.append("description", description);
     formDate.append("categoryId", cId);
@@ -113,31 +107,15 @@ export default function ProductEdit() {
       <h2 className=" text-center text-2xl font bold py-8">
         제품 수정 후 등록
       </h2>
-      {file ? (
-        <img
-          className="w-80 h-80 md:w-96 md:h-96 mx-auto p-10 md:p-16 border-gray-100 border"
-          src={URL.createObjectURL(file)}
-          alt="file"
-        />
-      ) : (
-        <img
-          className="w-80 h-80 md:w-96 md:h-96 mx-auto p-10 md:p-16 border-gray-100 border"
-          src={product?.image}
-          alt="file"
-        />
-      )}
+      <img
+        className="w-80 h-80 md:w-96 md:h-96 mx-auto p-10 md:p-16 border-gray-100 border"
+        src={product?.image}
+        alt="file"
+      />
       <form
         className="flex flex-col md:mx-auto p-12"
         onSubmit={handleSubmitEditProduct}
       >
-        <input
-          type="file"
-          accept="image/*"
-          name="file"
-          required
-          defaultValue={file}
-          onChange={handleChangeFile}
-        />
         <input
           type="text"
           name="제품명"
