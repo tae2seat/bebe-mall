@@ -7,16 +7,13 @@ import Button from "../components/buttons/Button";
 import { Link } from "react-router-dom";
 
 export default function MyCart() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [cartItems, setCartItems] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      setCartItems(cart);
-    }
-  }, [isLoggedIn]);
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartItems(cart);
+  }, []);
 
   useEffect(() => {
     const calculateTotalAmount = () => {
@@ -103,7 +100,10 @@ export default function MyCart() {
           {cartItems.map((product, id) => {
             return (
               <li key={id} className="flex justify-between my-4 items-center">
-                <img src={product.image} className="w-12 md:w-48 rounded-lg" />
+                <img
+                  src={product.image}
+                  className="w-12 sm:w-24 md:w-48 rounded-lg"
+                />
                 <div className="flex-1 flex justify-between ml-4">
                   <div className="basis-3/5">
                     <p className="text-lg">{product.name}</p>

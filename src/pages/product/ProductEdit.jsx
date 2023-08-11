@@ -8,8 +8,6 @@ export default function ProductEdit() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
   const [product, setProduct] = useState(null);
   const [categories, setCategories] = useState([]);
 
@@ -23,6 +21,7 @@ export default function ProductEdit() {
     setProductName(e.target.value);
   };
   const handleChangeCategory = (e) => {
+    console.log(e.target.value);
     setCId(e.target.value);
   };
   const handleChangePrice = (e) => {
@@ -36,10 +35,8 @@ export default function ProductEdit() {
   };
 
   useEffect(() => {
-    if (isLoggedIn) {
-      getProductDetail();
-      getCategory();
-    }
+    getProductDetail();
+    getCategory();
   }, []);
 
   const getProductDetail = async () => {
@@ -74,6 +71,7 @@ export default function ProductEdit() {
         }
       );
       setCategories(response.data);
+      console.log(categories);
     } catch (error) {
       console.log(error);
     }
@@ -103,7 +101,7 @@ export default function ProductEdit() {
       );
       console.log(response.status);
       if (response.status === 200) {
-        navigate(`/product/edit/${id}`);
+        navigate("/products");
       }
     } catch (error) {
       console.log(error);
@@ -156,9 +154,13 @@ export default function ProductEdit() {
         />
         <div className="p-4 outline-none border border-gray-300 my-1 text-left">
           <label className="text-gray-400">카테고리</label>
-          <select className="ml-3 text-center" onChange={handleChangeCategory}>
+          <select
+            className="ml-3 text-center"
+            defaultValue={cId}
+            onChange={handleChangeCategory}
+          >
             {categories?.map((category) => (
-              <option key={category.id} defaultValue={cId === category.id}>
+              <option key={category.id} value={category.id}>
                 {category.name}
               </option>
             ))}

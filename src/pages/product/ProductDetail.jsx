@@ -71,7 +71,7 @@ export default function ProductDetail() {
 
   const addToCart = (product, newOption) => {
     const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-
+    console.log(cartItems);
     const existingItemIndex = cartItems.findIndex(
       (item) => item.id === product.id && item.option === newOption
     );
