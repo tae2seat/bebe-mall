@@ -55,6 +55,7 @@ export default function ProductEdit() {
       console.log(error);
     }
   };
+  console.log(cId);
 
   const getCategory = async () => {
     try {
@@ -93,7 +94,6 @@ export default function ProductEdit() {
           },
         }
       );
-      console.log(response.status);
       if (response.status === 200) {
         navigate("/products");
       }
@@ -134,7 +134,7 @@ export default function ProductEdit() {
           <label className="text-gray-400">카테고리</label>
           <select
             className="ml-3 text-center"
-            defaultValue={cId}
+            value={cId}
             onChange={handleChangeCategory}
           >
             {categories?.map((category) => (
