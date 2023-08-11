@@ -45,7 +45,6 @@ export default function ProductEdit() {
           },
         }
       );
-      console.log(response.data);
       setProduct(response.data);
       setProductName(response.data.name);
       setCId(response.data.item_categories[0].categoryId);
