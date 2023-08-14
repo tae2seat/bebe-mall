@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BsFillPencilFill } from "react-icons/bs";
 import babyFace from "../images/ICON_08.png";
@@ -13,7 +13,6 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoggedIn, isAdmin, userRole } = useSelector((state) => state.auth);
-
   const [isNavbarVisible, setNavbarVisible] = useState(false);
   const timeOutRef = useRef();
 
@@ -21,6 +20,7 @@ export default function Navbar() {
     clearTimeout(timeOutRef.current);
     setNavbarVisible(true);
   };
+
   const handleMouseLeave = () => {
     clearTimeout(timeOutRef.current);
     timeOutRef.current = setTimeout(() => {
@@ -57,9 +57,9 @@ export default function Navbar() {
         <h1 className="hidden md:block">Bebe</h1>
         <span>Mall</span>
       </Link>
-      <div className="flex gap-2 md:gap-4">
+      <div className="relative flex items-center gap-2 md:gap-4">
         {isLoggedIn && (
-          <Link className="" to="/profile">
+          <Link to="/profile">
             <User />
           </Link>
         )}
@@ -69,37 +69,28 @@ export default function Navbar() {
           <Button onClick={handleLogin} text="Login" />
         )}
         <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          <img className=" cursor-pointer " src={menu} alt="menuBtn" />
+          <img
+            src={menu}
+            alt="menuBtn"
+            className="w-12 h-12 cursor-pointer p-2 "
+          />
           <nav
-            className={`relative text-center ${
+            className={`absolute top-14 -right-2 text-center ${
               isNavbarVisible ? "" : "hidden"
             }`}
           >
             <ul
-              className={`absolute  top-full  -right-2 mt-2 py-4 px-4 md:px-10 bg-rose-50 opacity-70 rounded-b-lg shadow-lg `}
+              className={`flex flex-col gap-4 w-40 p-4 bg-rose-50 opacity-70 rounded-b-lg shadow-lg text-[#472f4e] hover:text-[#a56a94] `}
             >
               <li>
-                <Link
-                  to="/products"
-                  className="block px-4 py-2 text-[#472f4e] hover:text-[#a56a94]"
-                >
-                  Products
-                </Link>
+                <Link to="/products">Products</Link>
               </li>
               <li>
-                <Link
-                  to="/carts"
-                  className="block px-4 py-2 text-[#472f4e] hover:text-[#a56a94]"
-                >
-                  Carts
-                </Link>
+                <Link to="/carts">Carts</Link>
               </li>
               {isAdmin && userRole === "admin" && (
                 <li className="flex justify-center">
-                  <Link
-                    to="/products/new"
-                    className="block px-4 py-2 text-[#472f4e] hover:text-[#a56a94]"
-                  >
+                  <Link to="/products/new">
                     <BsFillPencilFill />
                   </Link>
                 </li>

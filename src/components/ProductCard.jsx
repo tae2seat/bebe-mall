@@ -14,19 +14,20 @@ export default function ProductCard({ item }) {
   return (
     <li
       onClick={handleClickProduct}
-      className="w-72 h-96 mx-auto rounded-lg shadow-md overflow-hidden cursor-pointer transition-all hover:scale-105 mb-6 md:mb-12 "
+      className="w-72 mx-auto rounded-lg p-6 shadow-md overflow-hidden cursor-pointer transition-all hover:scale-105 "
+      // className="w-72 h-96 mx-auto rounded-lg shadow-md overflow-hidden cursor-pointer transition-all hover:scale-105 mb-6 md:mb-12 "
     >
       <img
-        className="h-2/3 mx-auto p-8 object-cover "
+        className="w-60 h-60 object-cover rounded-lg "
         src={item.image}
         alt="productImage"
       />
-      <div className="pt-6 px-6 text-lg flex justify-between items-center">
-        <h3 className="truncate">{item.name}</h3>
-        <p>{item.price}원</p>
+      <div className="text-start truncate mt-4">
+        <h3 className="text-xl">{item.name}</h3>
+        <p className="text-lg">{item.price}원</p>
+        <p className="text-sm text-gray-600 ">{categoryName}</p>
+        <p className="text-sm text-gray-600">{item.description}</p>
       </div>
-      <p className="mt-2 px-6 text-gray-600 truncate">{categoryName}</p>
-      <p className="mb-2 px-6 text-gray-600 truncate">{item.description}</p>
     </li>
   );
 }

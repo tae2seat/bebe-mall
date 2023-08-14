@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <div>
       <Banner />
-      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-10 md:py-20 ">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-10 gap-y-10">
         {products.items?.map((item, id) => (
           <ProductCard key={id} item={item} />
         ))}

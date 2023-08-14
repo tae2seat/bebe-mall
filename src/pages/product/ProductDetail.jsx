@@ -125,7 +125,7 @@ export default function ProductDetail() {
               ))}
             </select>
           </div>
-          <div className="flex flex-col py-8">
+          <div className="flex flex-col py-8 gap-2">
             <Button
               text="장바구니에 추가"
               onClick={() => {

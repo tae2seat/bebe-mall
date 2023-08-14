@@ -96,37 +96,34 @@ export default function MyCart() {
           </Link>
         </div>
       ) : (
-        <ul className="border-b border-gray-300 mb-8 p-4 px-8">
+        <ul className="flex flex-col items-center gap-6 border-b border-gray-300 p-8">
           {cartItems.map((product, id) => {
             return (
-              <li key={id} className="flex justify-between my-4 items-center">
+              <li key={id} className="flex justify-between items-center w-full">
                 <img
                   src={product.image}
-                  className="w-16 sm:w-24 md:w-48 rounded-lg md:p-4"
+                  className="w-20 h-20 md:w-40 md:h-40 rounded-sm"
                 />
-                <div className="flex-1 flex justify-between ml-4">
-                  <div className="basis-3/5">
-                    <p className="text-lg">{product.name}</p>
-                    <p className="text-lg font-bold text-brand">
-                      {product.option}
-                    </p>
-                    <p>{product.price}원</p>
-                  </div>
-                  <div className="flex text-2xl items-center">
-                    <AiOutlineMinusSquare
-                      className="transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1"
-                      onClick={() => handleClickMinus(product)}
-                    />
-                    <span>{product.quantity}</span>
-                    <AiOutlinePlusSquare
-                      className="transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1"
-                      onClick={() => handleClickPlus(product)}
-                    />
-                    <RiDeleteBin5Fill
-                      className="transition-all cursor-pointer hover:text-brand hover:scale-105 mx-1"
-                      onClick={() => handleClickDelete(product)}
-                    />
-                  </div>
+                <div>
+                  <p className="text-xl">{product.name}</p>
+                  <p className="text-sm md:py-2">{product.option}</p>
+                  <p>{product.price}원</p>
+                </div>
+
+                <div className="flex items-center gap-1 md:gap-2 md:text-lg">
+                  <AiOutlineMinusSquare
+                    className="transition-all cursor-pointer hover:text-brand hover:scale-105"
+                    onClick={() => handleClickMinus(product)}
+                  />
+                  <span>{product.quantity}</span>
+                  <AiOutlinePlusSquare
+                    className="transition-all cursor-pointer hover:text-brand hover:scale-105"
+                    onClick={() => handleClickPlus(product)}
+                  />
+                  <RiDeleteBin5Fill
+                    className="transition-all cursor-pointer hover:text-brand hover:scale-105"
+                    onClick={() => handleClickDelete(product)}
+                  />
                 </div>
               </li>
             );
@@ -134,12 +131,12 @@ export default function MyCart() {
         </ul>
       )}
       {cartItems.length > 0 && (
-        <div className="flex flex-col">
-          <div className="flex justify-center items-center mb-6 p-4 md:px-8 lg:px-16 gap-2 md:gap-6">
+        <div className="flex flex-col items-center gap-6 border-b border-gray-300 p-8 ">
+          <div className="flex justify-between w-full items-center gap-2 ">
             <PriceCard text="상품 총액" price={totalAmount} />
-            <p className="p-1">+</p>
+            <p>+</p>
             <PriceCard text="배송액" price={"3000"} />
-            <p className="p-1">=</p>
+            <p>=</p>
             <PriceCard text="총액" price={totalAmount + 3000} />
           </div>
           <Button

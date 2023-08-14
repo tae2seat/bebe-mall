@@ -150,7 +150,7 @@ export default function ProductEdit() {
           required
           onChange={handleChangeDescription}
         />
-        <Button text="제품 수정하기" />
+        <Button text="수정 완료하기" />
       </form>
     </section>
   );
