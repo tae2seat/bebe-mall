@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
-import { useSelector } from "react-redux";
 import PriceCard from "../components/PriceCard";
 import Button from "../components/buttons/Button";
 import { Link } from "react-router-dom";

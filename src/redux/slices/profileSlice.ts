@@ -1,5 +1,20 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+
+interface UserProfile {
+  name: string;
+  email: string;
+  gender: string;
+  birthDate: string;
+  id: number | null;
+  avatar: string;
+  isAdmin: number;
+}
+
+interface ProfileState extends UserProfile {
+  isLoading: boolean;
+  isError: boolean;
+}
 
 export const getProfile = createAsyncThunk(
   "profile/getProfile",
@@ -13,22 +28,23 @@ export const getProfile = createAsyncThunk(
           },
         }
       );
-      return response.data;
+      console.log(response.data)
+      return response.data as UserProfile;
     } catch (error) {
       console.log(error);
-      return thunkApi.rejectWithValue;
+      return thunkApi.rejectWithValue(error);
     }
   }
 );
 
-const initialState = {
+const initialState: ProfileState = {
   name: "",
   email: "",
   gender: "",
   birthDate: "",
-  userId: "",
+  id: null,
   avatar: "",
-  isAdmin: "",
+  isAdmin: 0,
   isLoading: false,
   isError: false,
 };
@@ -36,20 +52,30 @@ const initialState = {
 const profileSlice = createSlice({
   name: "profile",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getProfile.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
       })
-      .addCase(getProfile.fulfilled, (state, action) => {
-        state.name = action.payload.name;
-        state.email = action.payload.email;
-        state.gender = action.payload.gender;
-        state.birthDate = action.payload.birthDate;
-        state.userId = action.payload.id;
-        state.avatar = action.payload.avatar;
-        state.isAdmin = action.payload.isAdmin;
+      .addCase(getProfile.fulfilled, (state, action: PayloadAction<UserProfile>) => {
+       const {
+          name,
+          email,
+          gender,
+          birthDate,
+          id,
+          avatar,
+          isAdmin,
+        } = action.payload;
+        state.name = name;
+        state.email = email;
+        state.gender = gender;
+        state.birthDate = birthDate;
+        state.id = id;
+        state.avatar = avatar;
+        state.isAdmin = isAdmin;
         state.isLoading = false;
         state.isError = false;
       })

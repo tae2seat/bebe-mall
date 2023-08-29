@@ -1,6 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice} from "@reduxjs/toolkit";
 
-const initialState = {
+interface AuthUser {
+  currentUser: any;
+  isLoggedIn: boolean;
+  isAdmin: boolean;
+  userRole: string | null;
+}
+
+const initialState: AuthUser = {
   currentUser: null,
   isLoggedIn: !!localStorage.getItem("accessToken"),
   isAdmin: localStorage.getItem("isAdmin") === "true",
@@ -11,7 +18,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login: (state, action) => {
+    login: (state, action: PayloadAction<any>) => {
       console.log(action);
       state.isLoggedIn = true;
       state.currentUser = action.payload;
@@ -21,11 +28,12 @@ const authSlice = createSlice({
         state.userRole = "admin";
       }
       state.userRole = action.payload.userRole || null;
-      localStorage.setItem("isAdmin", state.isAdmin);
-      localStorage.setItem("userRole", state.userRole);
+      localStorage.setItem("isAdmin", state.isAdmin.toString());
+      localStorage.setItem("userRole", state.userRole || "");
     },
     logout: (state) => {
-      (state.isLoggedIn = false), (state.currentUser = null);
+      state.isLoggedIn = false,
+      state.currentUser = null;
       state.isAdmin = false;
       state.userRole = null;
       localStorage.removeItem("isAdmin");

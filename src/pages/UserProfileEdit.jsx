@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../redux/slices/profileSlice";
 import Button from "../components/buttons/Button";
@@ -22,9 +22,7 @@ export default function UserProfileEdit() {
   } = useForm();
 
   useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(getProfile());
-    }
+    dispatch(getProfile());
     setValue("name", name);
     setValue("gender", gender);
     setValue("birthDate", birthDate);
