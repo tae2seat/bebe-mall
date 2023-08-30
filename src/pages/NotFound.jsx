@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../components/buttons/Button";
+import Button from "../components/buttons/Button.jsx";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import babyFoot from "../lottie/baby foot.json";

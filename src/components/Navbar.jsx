@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsFillPencilFill } from "react-icons/bs";
 import babyFace from "../images/ICON_08.png";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "../components/buttons/Button";
+import Button from "./buttons/Button.jsx";
 import User from "./User";
 import { authApi } from "../axios";
 import { logout } from "../redux/slices/authSlice";

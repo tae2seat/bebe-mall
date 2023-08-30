@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Button from "../../components/buttons/Button";
+import Button from "../../components/buttons/Button.jsx";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";

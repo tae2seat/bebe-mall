@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../redux/slices/profileSlice";
-import Button from "../components/buttons/Button";
+import Button from "../components/buttons/Button.jsx";
 import { useNavigate } from "react-router-dom";
 
 export default function UserProfile() {

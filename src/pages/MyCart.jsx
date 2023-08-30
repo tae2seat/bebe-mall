@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
 import PriceCard from "../components/PriceCard";
-import Button from "../components/buttons/Button";
+import Button from "../components/buttons/Button.jsx";
 import { Link } from "react-router-dom";
 
 export default function MyCart() {

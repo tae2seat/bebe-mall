@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../redux/slices/profileSlice";
-import Button from "../components/buttons/Button";
+import Button from "../components/buttons/Button.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import NotFound from "./NotFound";
@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 export default function UserProfileEdit() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const { name, birthDate, gender, avatar, isLoading, isError } = useSelector(
     (state) => state.profile
   );
