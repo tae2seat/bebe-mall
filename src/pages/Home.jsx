@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Banner from "../components/Banner";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";

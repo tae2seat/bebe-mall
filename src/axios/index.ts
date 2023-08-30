@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios, { AxiosInstance, InternalAxiosRequestConfig,  AxiosResponse } from "axios";
 
-export const authApi = axios.create({
+export const authApi: AxiosInstance = axios.create({
     baseURL: 'https://api.mybebe.net/api/v1/auth'
 })
 
-export const loggedApi = axios.create({
+export const loggedApi: AxiosInstance = axios.create({
     baseURL:'https://api.mybebe.net/api/v1/diary',
     headers: {
         'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ export const loggedApi = axios.create({
 
 
 loggedApi.interceptors.request.use(
-    function(config) {
+    function(config: InternalAxiosRequestConfig) {
         const accessToken = localStorage.getItem('accessToken')
         config.headers.Authorization = `Bearer ${accessToken}`
         return config
@@ -25,11 +25,11 @@ loggedApi.interceptors.request.use(
 )
 
 loggedApi.interceptors.response.use(
-    function(response){
+    function(response: AxiosResponse){
         return response
     },
     function(error){
-        if(error.response === 404){
+        if(error.response?.status === 404){
             window.location.replace('/notfound')
         }
         return Promise.reject(error);
