@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Button from "../../components/buttons/Button.jsx";
+import Button from "../../components/buttons/Button";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../redux/hooks";
 
 export default function NewProduct() {
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
 
   const [productName, setProductName] = useState("");
   const [cId, setCId] = useState(1);

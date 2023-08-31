@@ -1,9 +1,27 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import axios from "axios";
 
+interface Products {
+  items: Product[]
+}
+
+interface Product {
+  name: string;
+  price: string;
+  image: string;
+  id: number;
+  description: string;
+  item_categories: {
+    category: {
+      name: string;
+    }
+    id: number;
+  }[];
+}
+
 export default function Products() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Products>({items: []});
 
   useEffect(() => {
     getProducts();
@@ -28,8 +46,8 @@ export default function Products() {
   // 로딩 중일 때 에러 뜰 때 경우
   return (
     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-10 gap-y-10">
-      {products.items?.map((item, id) => (
-        <ProductCard key={id} item={item} />
+      {products?.items?.map((item, id) => (
+        <ProductCard key={item.id} item={item} />
       ))}
     </ul>
   );

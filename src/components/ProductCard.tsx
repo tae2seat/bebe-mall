@@ -1,14 +1,33 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function ProductCard({ item }) {
+interface ItemCategory {
+  category: {
+    name: string;
+  }
+  id: number;
+}
+
+interface Product { 
+  name: string;
+  price: string;
+  image: string;
+  id: number;
+  description: string;
+  item_categories: ItemCategory[];
+}
+
+interface ProductCardProps {
+  item: Product;
+}
+
+export default function ProductCard({item}: ProductCardProps) {
   const navigate = useNavigate();
 
   const ProductId = item.id;
   const categoryName = item.item_categories[0].category.name;
 
   const handleClickProduct = () => {
-    navigate(`/product/detail/${ProductId}`); // 각각 product로 옮겨지도록 해야함
+    navigate(`/product/detail/${ProductId}`);
   };
 
   return (

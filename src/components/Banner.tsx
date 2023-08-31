@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Banner() {
   return (
     <section className="h-96 relative -z-10">
