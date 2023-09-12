@@ -28,6 +28,9 @@ export default function Login(): ReactElement {
       localStorage.setItem("refreshToken", response.data.refreshToken);
       localStorage.setItem("isAdmin", isAdmin);
       localStorage.setItem("userRole", userRole);
+      if (response.status === 401) {
+        alert('비밀번호가 정확하지 않습니다. 로그인을 다시 시도해주세요.')
+      }
       dispatch(login({ isAdmin: true, userRole: "admin" }));
       navigate("/");
     } catch (error) {

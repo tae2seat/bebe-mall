@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import Banner from "../components/Banner";
 import axios from "axios";
-import ProductCard from "../components/ProductCard";
 
 interface Products {
   items: Product[]
@@ -20,6 +19,8 @@ interface Product {
     id: number;
   }[];
 }
+
+const ProductCard = lazy(() => import("../components/ProductCard"))
 
 export default function Home() {
   const [products, setProducts] = useState<Products >({items: []});
@@ -49,7 +50,9 @@ export default function Home() {
       <Banner />
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-10 gap-y-10">
         {products?.items?.map((item) => (
-          <ProductCard key={item.id} item={item} />
+          <Suspense fallback={<div>Loading...</div>} key={item.id}  >
+            <ProductCard item={item} />
+          </Suspense>
         ))}
       </ul>
     </div>

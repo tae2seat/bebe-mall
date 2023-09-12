@@ -75,7 +75,7 @@ export default function Navbar() {
             className="w-12 h-12 cursor-pointer p-2 "
           />
           <nav
-            className={`absolute top-14 -right-2 text-center ${
+            className={`absolute top-16 -right-2 text-center ${
               isNavbarVisible ? "" : "hidden"
             }`}
           >
