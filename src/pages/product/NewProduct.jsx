@@ -43,7 +43,7 @@ export default function NewProduct() {
 
     try {
       const response = await axios.post(
-        "https://api.mybebe.net/api/v1/mall/item",
+        "https://api.tae2seat.com/api/v1/mall/item",
         formData,
         {
           headers: {
@@ -72,7 +72,7 @@ export default function NewProduct() {
   const getCategory = async () => {
     try {
       const response = await axios.get(
-        "https://api.mybebe.net/api/v1/mall/category",
+        "https://api.tae2seat.com/api/v1/mall/category",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

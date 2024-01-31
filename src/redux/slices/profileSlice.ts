@@ -21,7 +21,7 @@ export const getProfile = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const response = await axios.get(
-        "https://api.mybebe.net/api/v1/profile",
+        "https://api.tae2seat.com/api/v1/profile",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

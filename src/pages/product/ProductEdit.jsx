@@ -37,7 +37,7 @@ export default function ProductEdit() {
   const getProductDetail = async () => {
     try {
       const response = await axios.get(
-        `https://api.mybebe.net/api/v1/mall/item/${id}`,
+        `https://api.tae2seat.com/api/v1/mall/item/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -57,7 +57,7 @@ export default function ProductEdit() {
   const getCategory = async () => {
     try {
       const response = await axios.get(
-        "https://api.mybebe.net/api/v1/mall/category",
+        "https://api.tae2seat.com/api/v1/mall/category",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -82,7 +82,7 @@ export default function ProductEdit() {
 
     try {
       const response = await axios.put(
-        `https://api.mybebe.net/api/v1/mall/item/${id}`,
+        `https://api.tae2seat.com/api/v1/mall/item/${id}`,
         formDate,
         {
           headers: {

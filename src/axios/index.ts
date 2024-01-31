@@ -1,11 +1,11 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig,  AxiosResponse } from "axios";
 
 export const authApi: AxiosInstance = axios.create({
-    baseURL: 'https://api.mybebe.net/api/v1/auth'
+    baseURL: 'https://api.tae2seat.com/api/v1/auth'
 })
 
 export const loggedApi: AxiosInstance = axios.create({
-    baseURL:'https://api.mybebe.net/api/v1/diary',
+    baseURL:'https://api.tae2seat.com/api/v1/diary',
     headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`

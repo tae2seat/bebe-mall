@@ -30,7 +30,7 @@ export default function Products() {
   const getProducts = async () => {
     try {
       const response = await axios.get(
-        "https://api.mybebe.net/api/v1/mall/item",
+        "https://api.tae2seat.com/api/v1/mall/item",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

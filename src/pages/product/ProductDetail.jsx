@@ -40,7 +40,7 @@ export default function ProductDetail() {
   const getProductDetail = async () => {
     try {
       const response = await axios.get(
-        `https://api.mybebe.net/api/v1/mall/item/${id}`,
+        `https:/api.tae2seat.comt/api/v1/mall/item/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -56,7 +56,7 @@ export default function ProductDetail() {
   const getOptions = async () => {
     try {
       const response = await axios.get(
-        "https://api.mybebe.net/api/v1/mall/size",
+        "https://api.tae2seat.com/api/v1/mall/size",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

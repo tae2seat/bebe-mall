@@ -42,7 +42,7 @@ export default function UserProfileEdit() {
 
       try {
         const response = await axios.put(
-          "https://api.mybebe.net/api/v1/profile/avatar",
+          "https://api.tae2seat.com/api/v1/profile/avatar",
           formData,
           {
             headers: {
@@ -61,7 +61,7 @@ export default function UserProfileEdit() {
   const handleSubmitUserEdit = async (data) => {
     try {
       const response = await axios.put(
-        "https://api.mybebe.net/api/v1/profile/edit",
+        "https://api.tae2seat.com/api/v1/profile/edit",
         {
           ...data,
         },
