@@ -41,7 +41,7 @@ export default function UserProfileEdit() {
       formData.append("file", newAvatar);
 
       try {
-        const response = await axios.put(
+        const response = await axios.post(
           "https://api.tae2seat.com/api/v1/profile/avatar",
           formData,
           {
