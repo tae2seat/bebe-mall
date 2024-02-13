@@ -40,7 +40,7 @@ export default function ProductDetail() {
   const getProductDetail = async () => {
     try {
       const response = await axios.get(
-        `https:/api.tae2seat.comt/api/v1/mall/item/${id}`,
+        `https:/api.tae2seat.com/api/v1/mall/item/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
